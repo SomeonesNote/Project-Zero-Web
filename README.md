@@ -1,69 +1,139 @@
-# React + TypeScript + Vite
+# BidHub - 경매 플랫폼 웹사이트
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Figma 디자인을 기반으로 제작된 현대적인 경매 플랫폼 웹사이트입니다.
 
-Currently, two official plugins are available:
+## 🎨 디자인 특징
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **깔끔하고 모던한 UI**: Work Sans 폰트를 사용한 현대적인 디자인
+- **반응형 레이아웃**: 데스크톱, 태블릿, 모바일 모든 기기에서 최적화
+- **직관적인 사용자 경험**: 사용하기 쉬운 네비게이션과 검색 기능
 
-## Expanding the ESLint configuration
+## 🚀 주요 기능
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 헤더 섹션
+- BidHub 로고 및 브랜딩
+- 네비게이션 메뉴 (Categories, How it Works, Contact)
+- 검색 기능
+- 로그인/회원가입 버튼
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 메인 콘텐츠
+- **대형 검색바**: 아이템 검색 기능
+- **카테고리 태그**: Electronics, Collectibles, Home & Garden, Fashion, Art
+- **추천 상품**: 4개의 주요 상품 카드
+- **곧 마감되는 상품**: 4개의 소형 상품 카드
+- **페이지네이션**: 페이지 이동 기능
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 상품 카드
+- 상품 이미지
+- 상품명
+- 현재 입찰가
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ 기술 스택
+
+- **HTML5**: 시맨틱 마크업
+- **CSS3**: Flexbox, Grid, 반응형 디자인
+- **JavaScript**: 인터랙티브 기능, 이벤트 처리
+- **Google Fonts**: Work Sans 폰트 패밀리
+
+## 📁 파일 구조
+
+```
+Project-Zero/
+├── index.html          # 메인 HTML 파일
+├── styles.css          # CSS 스타일시트
+├── script.js           # JavaScript 기능
+├── images/             # 이미지 파일들
+│   ├── logo.svg
+│   ├── search-icon.svg
+│   ├── arrow-left.svg
+│   ├── arrow-right.svg
+│   ├── living-room.jpg
+│   ├── mustang.jpg
+│   ├── diamond-ring.jpg
+│   ├── painting.jpg
+│   ├── pocket-watch.jpg
+│   ├── handbag.jpg
+│   ├── baseball.jpg
+│   └── camera.jpg
+└── README.md           # 프로젝트 설명서
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 실행 방법
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. 프로젝트 폴더로 이동:
+   ```bash
+   cd Project-Zero
+   ```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. 웹 브라우저에서 `index.html` 파일을 열거나 로컬 서버를 실행:
+   ```bash
+   # Python 3
+   python -m http.server 8000
+   
+   # Node.js
+   npx serve .
+   
+   # PHP
+   php -S localhost:8000
+   ```
+
+3. 브라우저에서 `http://localhost:8000` 접속
+
+## 📱 반응형 디자인
+
+- **데스크톱 (1280px+)**: 4열 그리드 레이아웃
+- **태블릿 (768px-1199px)**: 3열 그리드 레이아웃
+- **모바일 (480px-767px)**: 2열 그리드 레이아웃
+- **소형 모바일 (480px 이하)**: 1열 그리드 레이아웃
+
+## 🎯 인터랙티브 기능
+
+- **검색 기능**: 실시간 검색어 입력 및 Enter 키 검색
+- **카테고리 필터링**: 카테고리 태그 클릭 시 활성화
+- **페이지네이션**: 페이지 번호 클릭 시 활성화
+- **상품 카드**: 클릭 시 상품 상세 정보 표시
+- **헤더 스크롤**: 스크롤 시 헤더 숨김/표시 효과
+- **호버 효과**: 버튼 및 카드에 마우스 호버 시 시각적 피드백
+
+## 🎨 색상 팔레트
+
+- **주요 색상**: #121417 (진한 회색)
+- **보조 색상**: #61758A (중간 회색)
+- **강조 색상**: #268CF5 (파란색)
+- **배경 색상**: #FFFFFF (흰색)
+- **경계선 색상**: #E5E8EB (연한 회색)
+- **입력 필드 배경**: #F0F2F5 (매우 연한 회색)
+
+## 🔧 커스터마이징
+
+### 색상 변경
+`styles.css` 파일에서 CSS 변수를 수정하여 색상을 변경할 수 있습니다.
+
+### 폰트 변경
+Google Fonts에서 다른 폰트를 선택하여 `index.html`의 링크를 수정할 수 있습니다.
+
+### 이미지 교체
+`images/` 폴더의 이미지 파일을 원하는 이미지로 교체할 수 있습니다.
+
+## 📝 향후 개선 사항
+
+- [ ] 실제 검색 API 연동
+- [ ] 사용자 인증 시스템
+- [ ] 실시간 입찰 기능
+- [ ] 상품 상세 페이지
+- [ ] 사용자 프로필 페이지
+- [ ] 관리자 대시보드
+- [ ] 다국어 지원
+- [ ] 다크 모드 테마
+
+## 🤝 기여하기
+
+프로젝트 개선을 위한 제안이나 버그 리포트는 언제든 환영합니다!
+
+## 📄 라이선스
+
+이 프로젝트는 MIT 라이선스 하에 배포됩니다.
+
+---
+
+**BidHub** - 당신의 경매 경험을 더욱 특별하게 만들어드립니다! 🎯✨

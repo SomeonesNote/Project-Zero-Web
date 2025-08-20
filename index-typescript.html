@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BidHub - TypeScript + API 기반 경매 플랫폼</title>
+    <meta name="description" content="TypeScript와 API를 활용한 현대적인 경매 플랫폼 웹사이트">
+    <meta name="keywords" content="auction, platform, typescript, api, modern-web, bidding">
+    <meta name="author" content="BidHub Team">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:title" content="BidHub - TypeScript + API 기반 경매 플랫폼">
+    <meta property="og:description" content="TypeScript와 API를 활용한 현대적인 경매 플랫폼 웹사이트">
+    <meta property="og:image" content="images/logo.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourdomain.com/">
+    <meta property="twitter:title" content="BidHub - TypeScript + API 기반 경매 플랫폼">
+    <meta property="twitter:description" content="TypeScript와 API를 활용한 현대적인 경매 플랫폼 웹사이트">
+    <meta property="twitter:image" content="images/logo.svg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/components.css">
+    
+    <!-- TypeScript 컴파일된 JavaScript 로드 -->
+    <script type="module" src="dist/main.js"></script>
+</head>
+<body>
+    <!-- 로딩 인디케이터 -->
+    <div id="loading" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>BidHub 로딩 중...</p>
+    </div>
+
+    <!-- 에러 메시지 컨테이너 -->
+    <div id="error-container" class="error-message" style="display: none;">
+        <h4>모듈 로딩 오류</h4>
+        <p>TypeScript 모듈을 로드하는 중 오류가 발생했습니다.</p>
+        <button onclick="location.reload()">새로고침</button>
+    </div>
+
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/logo.svg" alt="BidHub Logo">
+                <span>BidHub</span>
+            </div>
+            
+            <nav class="nav">
+                <a href="#featured" class="nav-link">Featured</a>
+                <a href="#ending-soon" class="nav-link">Ending Soon</a>
+                <a href="#categories" class="nav-link">Categories</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+            
+            <div class="header-search">
+                <input type="text" placeholder="Search items..." class="search-input">
+                <button class="search-btn">🔍</button>
+            </div>
+            
+            <div class="header-actions">
+                <button class="btn btn-login">Login</button>
+                <button class="btn btn-signup">Sign Up</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠는 TypeScript로 동적 생성됨 -->
+    <main id="main-content">
+        <!-- TypeScript 컴포넌트들이 여기에 렌더링됩니다 -->
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>BidHub</h3>
+                <p>TypeScript와 API를 활용한 현대적인 경매 플랫폼</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#featured">Featured Items</a></li>
+                    <li><a href="#ending-soon">Ending Soon</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#about">About Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#help">Help Center</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 BidHub. All rights reserved. Built with TypeScript & Modern Web Technologies.</p>
+        </div>
+    </footer>
+
+    <!-- 개발자 도구 정보 -->
+    <script>
+        // TypeScript 모듈 로딩 상태 확인
+        window.addEventListener('load', function() {
+            const loading = document.getElementById('loading');
+            const errorContainer = document.getElementById('error-container');
+            
+            // 3초 후에도 BidHubUtils가 없으면 에러 표시
+            setTimeout(() => {
+                if (!window.BidHubUtils) {
+                    if (loading) loading.style.display = 'none';
+                    if (errorContainer) errorContainer.style.display = 'block';
+                    
+                    console.error('TypeScript 모듈 로딩 실패');
+                } else {
+                    if (loading) loading.style.display = 'none';
+                    console.log('TypeScript 모듈 로딩 완료');
+                }
+            }, 3000);
+        });
+
+        // 모듈 로딩 오류 처리
+        window.addEventListener('error', function(e) {
+            if (e.message.includes('Failed to fetch dynamically imported module')) {
+                const loading = document.getElementById('loading');
+                const errorContainer = document.getElementById('error-container');
+                
+                if (loading) loading.style.display = 'none';
+                if (errorContainer) errorContainer.style.display = 'block';
+                
+                console.error('TypeScript 모듈 로딩 오류:', e);
+            }
+        });
+    </script>
+
+    <!-- 개발자 도구 안내 -->
+    <script>
+        // 개발 모드에서만 표시
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            console.log(`
+                🚀 BidHub TypeScript + API 버전
+                
+                이 페이지는 TypeScript로 작성되었으며, 컴파일된 JavaScript를 사용합니다.
+                
+                개발자 도구에서 다음 명령어를 사용할 수 있습니다:
+                - BidHubUtils.testAPI.getAllItems()
+                - BidHubUtils.getConfig()
+                - BidHubUtils.updateConfig({ enableDebugMode: true })
+                
+                TypeScript 소스 코드는 src/ 폴더에 있습니다.
+                컴파일된 코드는 dist/ 폴더에 생성됩니다.
+            `);
+        }
+    </script>
+</body>
+</html>

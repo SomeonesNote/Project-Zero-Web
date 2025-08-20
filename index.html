@@ -1,20 +1,173 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BidHub</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Work+Sans%3Awght%40400%3B500%3B700%3B900"
-    />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BidHub - 경매 플랫폼</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="images/logo.svg" alt="BidHub Logo" class="logo">
+                <h1 class="logo-text">BidHub</h1>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-link">Categories</a>
+                <a href="#" class="nav-link">How it Works</a>
+                <a href="#" class="nav-link">Contact</a>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-container">
+                    <div class="search-icon-wrapper">
+                        <img src="images/search-icon.svg" alt="Search" class="search-icon">
+                    </div>
+                    <input type="text" placeholder="Search" class="search-input">
+                </div>
+                <button class="btn btn-login">Log In</button>
+                <button class="btn btn-signup">Sign Up</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+        <!-- 검색 섹션 -->
+        <section class="search-section">
+            <div class="search-container-large">
+                <div class="search-icon-wrapper">
+                    <img src="images/search-icon.svg" alt="Search" class="search-icon">
+                </div>
+                <input type="text" placeholder="Search for items" class="search-input-large">
+            </div>
+        </section>
+
+        <!-- 카테고리 섹션 -->
+        <section class="categories-section">
+            <div class="category-tags">
+                <span class="category-tag">Electronics</span>
+                <span class="category-tag">Collectibles</span>
+                <span class="category-tag">Home & Garden</span>
+                <span class="category-tag">Fashion</span>
+                <span class="category-tag">Art</span>
+            </div>
+        </section>
+
+        <!-- 추천 상품 섹션 -->
+        <section class="featured-section">
+            <h2 class="section-title">Featured Items</h2>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="images/living-room.jpg" alt="Modern Living Room Set">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-title">Modern Living Room Set</h3>
+                        <p class="item-bid">Current Bid: $1,200</p>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="images/mustang.jpg" alt="Classic 1967 Mustang">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-title">Classic 1967 Mustang</h3>
+                        <p class="item-bid">Current Bid: $25,000</p>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="images/diamond-ring.jpg" alt="Elegant Diamond Ring">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-title">Elegant Diamond Ring</h3>
+                        <p class="item-bid">Current Bid: $5,000</p>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="images/painting.jpg" alt="Contemporary Abstract Painting">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-title">Contemporary Abstract Painting</h3>
+                        <p class="item-bid">Current Bid: $800</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 곧 마감되는 상품 섹션 -->
+        <section class="ending-soon-section">
+            <h2 class="section-title">Ending Soon</h2>
+            <div class="items-grid-small">
+                <div class="item-card-small">
+                    <div class="item-image-small">
+                        <img src="images/pocket-watch.jpg" alt="Antique Pocket Watch">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-title">Antique Pocket Watch</h3>
+                        <p class="item-bid">Current Bid: $350</p>
+                    </div>
+                </div>
+                
+                <div class="item-card-small">
+                    <div class="item-image-small">
+                        <img src="images/handbag.jpg" alt="Designer Handbag">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-title">Designer Handbag</h3>
+                        <p class="item-bid">Current Bid: $700</p>
+                    </div>
+                </div>
+                
+                <div class="item-card-small">
+                    <div class="item-image-small">
+                        <img src="images/baseball.jpg" alt="Signed Baseball">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-title">Signed Baseball</h3>
+                        <p class="item-bid">Current Bid: $150</p>
+                    </div>
+                </div>
+                
+                <div class="item-card-small">
+                    <div class="item-image-small">
+                        <img src="images/camera.jpg" alt="Vintage Camera">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-title">Vintage Camera</h3>
+                        <p class="item-bid">Current Bid: $200</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 페이지네이션 -->
+        <section class="pagination-section">
+            <div class="pagination">
+                <button class="pagination-btn">
+                    <img src="images/arrow-left.svg" alt="Previous">
+                </button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">4</button>
+                <button class="pagination-btn">
+                    <img src="images/arrow-right.svg" alt="Next">
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
 </html>
