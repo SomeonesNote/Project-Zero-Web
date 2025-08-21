@@ -1,4 +1,4 @@
-import { EventBusInterface, EventCallback } from '../types';
+import { EventBusInterface, EventCallback } from "../types";
 
 export class EventBus implements EventBusInterface {
   private events: Record<string, EventCallback[]>;
@@ -16,7 +16,7 @@ export class EventBus implements EventBusInterface {
 
   off<T>(event: string, callback: EventCallback<T>): void {
     if (!this.events[event]) return;
-    
+
     const index = this.events[event].indexOf(callback);
     if (index > -1) {
       this.events[event].splice(index, 1);
@@ -25,8 +25,8 @@ export class EventBus implements EventBusInterface {
 
   emit<T>(event: string, data: T): void {
     if (!this.events[event]) return;
-    
-    this.events[event].forEach(callback => {
+
+    this.events[event].forEach((callback) => {
       try {
         callback(data);
       } catch (error) {
@@ -64,8 +64,11 @@ export class EventBus implements EventBusInterface {
   // 이벤트 버스 상태 정보 반환
   getStats(): { totalEvents: number; totalListeners: number } {
     const totalEvents = Object.keys(this.events).length;
-    const totalListeners = Object.values(this.events).reduce((sum, listeners) => sum + listeners.length, 0);
-    
+    const totalListeners = Object.values(this.events).reduce(
+      (sum, listeners) => sum + listeners.length,
+      0,
+    );
+
     return { totalEvents, totalListeners };
   }
 }

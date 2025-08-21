@@ -43,7 +43,7 @@ export interface ShippingInfo {
   estimatedDays: number;
 }
 
-export type ItemCondition = 'new' | 'used' | 'vintage' | 'antique';
+export type ItemCondition = "new" | "used" | "vintage" | "antique";
 
 export interface PaginationInfo {
   currentPage: number;
@@ -62,8 +62,8 @@ export interface FilterInfo {
   };
   sortBy: string;
   available: {
-    categories: { id: string; name: string; }[];
-    sortOptions: { value: string; label: string; }[];
+    categories: { id: string; name: string }[];
+    sortOptions: { value: string; label: string }[];
   };
 }
 
@@ -103,7 +103,7 @@ export interface APIOptions {
 // 컴포넌트 옵션 타입
 export interface SearchBarOptions {
   placeholder?: string;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   value?: string;
   id?: string;
   onSearch?: (term: string) => void;
@@ -185,7 +185,10 @@ export interface APIInterface {
   getAllItems(options?: APIOptions): Promise<ItemsAPIResponse>;
   getFeaturedItems(limit?: number): Promise<Item[]>;
   getEndingSoonItems(limit?: number): Promise<Item[]>;
-  getItemsByCategory(categoryId: string, options?: APIOptions): Promise<ItemsAPIResponse>;
+  getItemsByCategory(
+    categoryId: string,
+    options?: APIOptions,
+  ): Promise<ItemsAPIResponse>;
   getItemDetail(itemId: string): Promise<Item>;
   getSearchSuggestions(query: string): Promise<SearchSuggestion[]>;
   getCategories(): Promise<Category[]>;

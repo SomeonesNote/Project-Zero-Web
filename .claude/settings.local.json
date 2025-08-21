@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude mcp)",
+      "Bash(claude mcp:*)",
+      "Bash(bunx:*)",
+      "Bash(npx:*)",
+      "Bash(ccuage)",
+      "mcp__serena__list_dir",
+      "Bash(npm install:*)",
+      "WebSearch",
+      "Bash(npm view:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run lint)",
+      "Bash(npm ls:*)",
+      "Bash(npm run lint:*)",
+      "mcp__Framelink_Figma_MCP__get_figma_data",
+      "Bash(npm run dev:*)",
+      "Bash(npm run start:*)",
+      "Bash(rm:*)"
+    ],
+    "deny": [],
+    "ask": [],
+    "additionalDirectories": [
+      "/Users/neveradio/.claude"
+    ]
+  }
+}

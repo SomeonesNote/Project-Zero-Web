@@ -6,35 +6,17 @@
     <title>BidHub - 경매 플랫폼</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/signup.css">
+    <link rel="stylesheet" href="styles/register.css">
+    <link rel="stylesheet" href="styles/items.css">
+    <link rel="stylesheet" href="styles/detail.css">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 헤더 -->
-    <header class="header">
-        <div class="header-container">
-            <div class="logo-section">
-                <img src="images/logo.svg" alt="BidHub Logo" class="logo">
-                <h1 class="logo-text">BidHub</h1>
-            </div>
-            
-            <nav class="nav-menu">
-                <a href="#" class="nav-link">Categories</a>
-                <a href="#" class="nav-link">How it Works</a>
-                <a href="#" class="nav-link">Contact</a>
-            </nav>
-            
-            <div class="header-actions">
-                <div class="search-container">
-                    <div class="search-icon-wrapper">
-                        <img src="images/search-icon.svg" alt="Search" class="search-icon">
-                    </div>
-                    <input type="text" placeholder="Search" class="search-input">
-                </div>
-                <button class="btn btn-login">Log In</button>
-                <button class="btn btn-signup">Sign Up</button>
-            </div>
-        </div>
-    </header>
+    <div id="app">
+        <!-- 헤더 -->
+        <header class="header" id="mainHeader">
+        </header>
 
     <!-- 메인 콘텐츠 -->
     <main class="main-content">
@@ -48,14 +30,10 @@
             </div>
         </section>
 
-        <!-- 카테고리 섹션 -->
-        <section class="categories-section">
-            <div class="category-tags">
-                <span class="category-tag">Electronics</span>
-                <span class="category-tag">Collectibles</span>
-                <span class="category-tag">Home & Garden</span>
-                <span class="category-tag">Fashion</span>
-                <span class="category-tag">Art</span>
+        <!-- 검색 히스토리 섹션 -->
+        <section class="search-history-section" id="searchHistorySection">
+            <div class="search-history-container">
+                <div id="searchHistoryTags"></div>
             </div>
         </section>
 
@@ -63,45 +41,7 @@
         <section class="featured-section">
             <h2 class="section-title">Featured Items</h2>
             <div class="items-grid">
-                <div class="item-card">
-                    <div class="item-image">
-                        <img src="images/living-room.jpg" alt="Modern Living Room Set">
-                    </div>
-                    <div class="item-info">
-                        <h3 class="item-title">Modern Living Room Set</h3>
-                        <p class="item-bid">Current Bid: $1,200</p>
-                    </div>
-                </div>
-                
-                <div class="item-card">
-                    <div class="item-image">
-                        <img src="images/mustang.jpg" alt="Classic 1967 Mustang">
-                    </div>
-                    <div class="item-info">
-                        <h3 class="item-title">Classic 1967 Mustang</h3>
-                        <p class="item-bid">Current Bid: $25,000</p>
-                    </div>
-                </div>
-                
-                <div class="item-card">
-                    <div class="item-image">
-                        <img src="images/diamond-ring.jpg" alt="Elegant Diamond Ring">
-                    </div>
-                    <div class="item-info">
-                        <h3 class="item-title">Elegant Diamond Ring</h3>
-                        <p class="item-bid">Current Bid: $5,000</p>
-                    </div>
-                </div>
-                
-                <div class="item-card">
-                    <div class="item-image">
-                        <img src="images/painting.jpg" alt="Contemporary Abstract Painting">
-                    </div>
-                    <div class="item-info">
-                        <h3 class="item-title">Contemporary Abstract Painting</h3>
-                        <p class="item-bid">Current Bid: $800</p>
-                    </div>
-                </div>
+                <!-- 동적으로 생성됩니다 -->
             </div>
         </section>
 
@@ -109,65 +49,870 @@
         <section class="ending-soon-section">
             <h2 class="section-title">Ending Soon</h2>
             <div class="items-grid-small">
-                <div class="item-card-small">
-                    <div class="item-image-small">
-                        <img src="images/pocket-watch.jpg" alt="Antique Pocket Watch">
-                    </div>
-                    <div class="item-info">
-                        <h3 class="item-title">Antique Pocket Watch</h3>
-                        <p class="item-bid">Current Bid: $350</p>
-                    </div>
-                </div>
-                
-                <div class="item-card-small">
-                    <div class="item-image-small">
-                        <img src="images/handbag.jpg" alt="Designer Handbag">
-                    </div>
-                    <div class="item-info">
-                        <h3 class="item-title">Designer Handbag</h3>
-                        <p class="item-bid">Current Bid: $700</p>
-                    </div>
-                </div>
-                
-                <div class="item-card-small">
-                    <div class="item-image-small">
-                        <img src="images/baseball.jpg" alt="Signed Baseball">
-                    </div>
-                    <div class="item-info">
-                        <h3 class="item-title">Signed Baseball</h3>
-                        <p class="item-bid">Current Bid: $150</p>
-                    </div>
-                </div>
-                
-                <div class="item-card-small">
-                    <div class="item-image-small">
-                        <img src="images/camera.jpg" alt="Vintage Camera">
-                    </div>
-                    <div class="item-info">
-                        <h3 class="item-title">Vintage Camera</h3>
-                        <p class="item-bid">Current Bid: $200</p>
-                    </div>
-                </div>
+                <!-- 동적으로 생성됩니다 -->
             </div>
         </section>
 
-        <!-- 페이지네이션 -->
-        <section class="pagination-section">
-            <div class="pagination">
-                <button class="pagination-btn">
-                    <img src="images/arrow-left.svg" alt="Previous">
-                </button>
-                <button class="pagination-btn active">1</button>
-                <button class="pagination-btn">2</button>
-                <button class="pagination-btn">3</button>
-                <button class="pagination-btn">4</button>
-                <button class="pagination-btn">
-                    <img src="images/arrow-right.svg" alt="Next">
-                </button>
-            </div>
-        </section>
+        <!-- 페이지네이션 제거 -->
     </main>
+    </div>
 
-    <script src="script.js"></script>
+    <script>
+        // 간단한 라우팅 시스템
+        let currentPage = 'main';
+        
+        // 공통 헤더 HTML 생성
+        function getCommonHeaderHTML() {
+            return `
+                <div class="header-container">
+                    <div class="logo-section">
+                        <img src="images/logo.svg" alt="BidHub Logo" class="logo" onclick="navigateToPage('main')" style="cursor: pointer;">
+                        <h1 class="logo-text" onclick="navigateToPage('main')" style="cursor: pointer;">BidHub</h1>
+                    </div>
+                    
+                    <div class="header-actions">
+                        <nav class="nav-menu">
+                            <a href="#" class="nav-link">How it Works</a>
+                            <a href="#" class="nav-link">Contact</a>
+                        </nav>
+                        <button class="btn btn-login" onclick="navigateToPage('signup')">Log In</button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function navigateToPage(page) {
+            currentPage = page;
+            const appContainer = document.getElementById('app');
+            if (!appContainer) return;
+            
+            switch (page) {
+                case 'signup':
+                    showSignUpPage();
+                    break;
+                case 'register':
+                    showRegisterPage();
+                    break;
+                case 'item-detail':
+                    // 상세 페이지는 showItemDetailPage에서 처리
+                    break;
+                case 'main':
+                default:
+                    showMainPage();
+                    break;
+            }
+        }
+        
+        function showSignUpPage() {
+            const appContainer = document.getElementById('app');
+            if (!appContainer) return;
+            
+            // 메인 컨텐츠 숨기기
+            const mainContent = appContainer.querySelector('.main-content');
+            if (mainContent) {
+                mainContent.style.display = 'none';
+            }
+            
+            // signup 페이지 컨테이너가 없으면 생성
+            let signupContainer = appContainer.querySelector('.signup-page');
+            if (!signupContainer) {
+                signupContainer = document.createElement('div');
+                signupContainer.className = 'signup-page';
+                signupContainer.innerHTML = getSignUpHTML();
+                appContainer.appendChild(signupContainer);
+                
+                // 이벤트 리스너 추가
+                const signinLink = signupContainer.querySelector('#signinLink');
+                if (signinLink) {
+                    signinLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        navigateToPage('main');
+                    });
+                }
+                
+                const socialButtons = signupContainer.querySelectorAll('.social-btn');
+                socialButtons.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const provider = btn.className.includes('apple') ? 'Apple' :
+                                        btn.className.includes('google') ? 'Google' :
+                                        btn.className.includes('greenline') ? 'GreenLine' : 'BrownTalk';
+                        alert(`${provider} 로그인 기능은 준비 중입니다.`);
+                    });
+                });
+                
+                const signupBtn = signupContainer.querySelector('#signupBtn');
+                if (signupBtn) {
+                    signupBtn.addEventListener('click', function() {
+                        navigateToPage('register');
+                    });
+                }
+            }
+            
+            signupContainer.style.display = 'block';
+        }
+        
+        function showRegisterPage() {
+            const appContainer = document.getElementById('app');
+            if (!appContainer) return;
+            
+            // 메인 컨텐츠 숨기기
+            const mainContent = appContainer.querySelector('.main-content');
+            if (mainContent) {
+                mainContent.style.display = 'none';
+            }
+            
+            // signup 페이지 숨기기
+            const signupContainer = appContainer.querySelector('.signup-page');
+            if (signupContainer) {
+                signupContainer.style.display = 'none';
+            }
+            
+            // 상세 페이지 숨기기
+            const detailContainer = appContainer.querySelector('.item-detail-page');
+            if (detailContainer) {
+                detailContainer.style.display = 'none';
+            }
+            
+            // register 페이지 컨테이너가 없으면 생성
+            let registerContainer = appContainer.querySelector('.register-page');
+            if (!registerContainer) {
+                registerContainer = document.createElement('div');
+                registerContainer.className = 'register-page';
+                registerContainer.innerHTML = getRegisterHTML();
+                appContainer.appendChild(registerContainer);
+                
+                // 이벤트 리스너 추가
+                setupRegisterEvents();
+            }
+            
+            registerContainer.style.display = 'block';
+            
+            // 페이지 상태 변경
+            currentPage = 'register';
+        }
+        
+        function showMainPage() {
+            const appContainer = document.getElementById('app');
+            if (!appContainer) return;
+            
+            // signup 페이지 숨기기
+            const signupContainer = appContainer.querySelector('.signup-page');
+            if (signupContainer) {
+                signupContainer.style.display = 'none';
+            }
+            
+            // register 페이지 숨기기
+            const registerContainer = appContainer.querySelector('.register-page');
+            if (registerContainer) {
+                registerContainer.style.display = 'none';
+            }
+            
+            // 상세 페이지 숨기기
+            const detailContainer = appContainer.querySelector('.item-detail-page');
+            if (detailContainer) {
+                detailContainer.style.display = 'none';
+            }
+            
+            // 메인 컨텐츠 보이기
+            const mainContent = appContainer.querySelector('.main-content');
+            if (mainContent) {
+                mainContent.style.display = 'block';
+            }
+        }
+        
+        async function showItemDetailPage(itemId, itemType) {
+            const appContainer = document.getElementById('app');
+            if (!appContainer) return;
+            
+            // 메인 컨텐츠 숨기기
+            const mainContent = appContainer.querySelector('.main-content');
+            if (mainContent) {
+                mainContent.style.display = 'none';
+            }
+            
+            // signup 페이지 숨기기
+            const signupContainer = appContainer.querySelector('.signup-page');
+            if (signupContainer) {
+                signupContainer.style.display = 'none';
+            }
+            
+            // 아이템 데이터 가져오기
+            let item = null;
+            if (itemType === 'featured') {
+                const items = await fetchFeaturedItems();
+                item = items.find(i => i.id === itemId);
+            } else if (itemType === 'ending-soon') {
+                const items = await fetchEndingSoonItems();
+                item = items.find(i => i.id === itemId);
+            }
+            
+            if (!item) {
+                console.error('Item not found:', itemId);
+                return;
+            }
+            
+            // 상세 페이지 컨테이너가 없으면 생성
+            let detailContainer = appContainer.querySelector('.item-detail-page');
+            if (!detailContainer) {
+                detailContainer = document.createElement('div');
+                detailContainer.className = 'item-detail-page';
+                appContainer.appendChild(detailContainer);
+            }
+            
+            detailContainer.innerHTML = getItemDetailHTML(item);
+            detailContainer.style.display = 'block';
+            
+            // 이벤트 리스너 추가
+            setupItemDetailEvents();
+            
+            // 페이지 상태 변경
+            currentPage = 'item-detail';
+        }
+        
+        function getItemDetailHTML(item) {
+            // 더미 입찰 히스토리 데이터
+            const bidHistory = [
+                { bidder: 'UserA123', amount: item.currentBid, time: '2 min ago' },
+                { bidder: 'BidMaster', amount: item.currentBid - 50, time: '5 min ago' },
+                { bidder: 'Collector99', amount: item.currentBid - 100, time: '12 min ago' },
+                { bidder: 'AuctionKing', amount: item.currentBid - 150, time: '18 min ago' }
+            ];
+            
+            return `
+                <div class="item-detail-container">
+                    <!-- Main Content -->
+                    <div class="detail-main">
+                        <div class="detail-content">
+                            <!-- 상품 이미지 섹션 -->
+                            <div class="detail-image-section">
+                                <div class="detail-image">
+                                    <img src="${item.image}" alt="${item.title}">
+                                </div>
+                            </div>
+                            
+                            <!-- 상품 정보 섹션 -->
+                            <div class="detail-info-section">
+                                <div class="detail-header-info">
+                                    <h1 class="detail-title">${item.title}</h1>
+                                    <p class="detail-description">${item.description || '상품에 대한 상세 설명입니다.'}</p>
+                                </div>
+                                
+                                <!-- 경매 타입 토글 -->
+                                <div class="auction-type-toggle">
+                                    <div class="toggle-container">
+                                        <div class="toggle-option active" data-type="monetary">
+                                            <span>Monetary Bid</span>
+                                        </div>
+                                        <div class="toggle-option" data-type="trade">
+                                            <span>Trade Offer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bid-info monetary-only">
+                                    <div class="current-bid">
+                                        <span class="bid-label">Current Bid</span>
+                                        <span class="bid-amount">$${item.currentBid.toLocaleString()}</span>
+                                    </div>
+                                    
+                                    <div class="bid-count">
+                                        <span class="bid-count-text">${item.bidCount || 0} bids</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- 입찰 히스토리 -->
+                                <div class="bid-history monetary-only">
+                                    <h3 class="history-title">Bid History</h3>
+                                    <div class="history-table">
+                                        <div class="history-header">
+                                            <span>Bidder</span>
+                                            <span>Amount</span>
+                                            <span>Time</span>
+                                        </div>
+                                        ${bidHistory.map(bid => `
+                                            <div class="history-row">
+                                                <span class="bidder">${bid.bidder}</span>
+                                                <span class="amount">$${bid.amount.toLocaleString()}</span>
+                                                <span class="time">${bid.time}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                
+                                <!-- 카운트다운 타이머 -->
+                                <div class="countdown-section">
+                                    <div class="countdown-timer">
+                                        <div class="timer-item">
+                                            <span class="timer-value" id="days">05</span>
+                                            <span class="timer-label">Days</span>
+                                        </div>
+                                        <div class="timer-item">
+                                            <span class="timer-value" id="hours">12</span>
+                                            <span class="timer-label">Hours</span>
+                                        </div>
+                                        <div class="timer-item">
+                                            <span class="timer-value" id="minutes">34</span>
+                                            <span class="timer-label">Minutes</span>
+                                        </div>
+                                        <div class="timer-item">
+                                            <span class="timer-value" id="seconds">56</span>
+                                            <span class="timer-label">Seconds</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 현금 입찰 폼 -->
+                                <div class="bid-form monetary-form">
+                                    <div class="bid-input-container">
+                                        <input type="number" class="bid-input" placeholder="Enter your bid" min="${item.currentBid + 1}">
+                                    </div>
+                                    <button class="place-bid-btn" id="placeBidBtn">Place Bid</button>
+                                </div>
+                                
+                                <!-- 물물교환 폼 -->
+                                <div class="trade-form" style="display: none;">
+                                    <div class="trade-offers-section">
+                                        <h3 class="section-subtitle">Other Trade Offers</h3>
+                                        <div class="other-offers">
+                                            <div class="offer-card">
+                                                <div class="offer-image">
+                                                    <img src="images/camera.jpg" alt="Vintage Camera">
+                                                </div>
+                                                <div class="offer-info">
+                                                    <h4 class="offer-title">Vintage Camera</h4>
+                                                    <p class="offer-description">A vintage camera in good condition</p>
+                                                </div>
+                                            </div>
+                                            <div class="offer-card">
+                                                <div class="offer-image">
+                                                    <img src="images/pocket-watch.jpg" alt="Antique Coin Set">
+                                                </div>
+                                                <div class="offer-info">
+                                                    <h4 class="offer-title">Antique Coin Set</h4>
+                                                    <p class="offer-description">A set of antique coins</p>
+                                                </div>
+                                            </div>
+                                            <div class="offer-card">
+                                                <div class="offer-image">
+                                                    <img src="images/baseball.jpg" alt="Signed Baseball">
+                                                </div>
+                                                <div class="offer-info">
+                                                    <h4 class="offer-title">Signed Baseball</h4>
+                                                    <p class="offer-description">A signed baseball</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="your-trade-section">
+                                        <h3 class="section-subtitle">Your Trade Offer</h3>
+                                        <div class="trade-form-fields">
+                                            <div class="form-field">
+                                                <label class="field-label">Item Description</label>
+                                                <textarea class="trade-input" placeholder="Describe the item you are offering" rows="3"></textarea>
+                                            </div>
+                                            <div class="form-field">
+                                                <label class="field-label">Estimated Value</label>
+                                                <input type="text" class="trade-input" placeholder="Enter the estimated value of your item">
+                                            </div>
+                                            <div class="upload-section">
+                                                <div class="upload-area">
+                                                    <div class="upload-content">
+                                                        <h4 class="upload-title">Upload Item Photo</h4>
+                                                        <p class="upload-subtitle">Drag and drop or click to upload</p>
+                                                    </div>
+                                                    <button class="upload-btn">Upload</button>
+                                                </div>
+                                            </div>
+                                            <button class="submit-trade-btn">Submit Trade Offer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function setupItemDetailEvents() {
+            // 토글 버튼 이벤트
+            const toggleOptions = document.querySelectorAll('.toggle-option');
+            const monetaryForm = document.querySelector('.monetary-form');
+            const tradeForm = document.querySelector('.trade-form');
+            const monetaryOnlyElements = document.querySelectorAll('.monetary-only');
+            
+            toggleOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    
+                    // 활성 상태 변경
+                    toggleOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 폼 및 현금 관련 내용 표시/숨기기
+                    if (type === 'monetary') {
+                        monetaryForm.style.display = 'flex';
+                        tradeForm.style.display = 'none';
+                        monetaryOnlyElements.forEach(el => el.style.display = 'flex');
+                    } else {
+                        monetaryForm.style.display = 'none';
+                        tradeForm.style.display = 'block';
+                        monetaryOnlyElements.forEach(el => el.style.display = 'none');
+                    }
+                });
+            });
+            
+            // 입찰 버튼 이벤트
+            const placeBidBtn = document.getElementById('placeBidBtn');
+            if (placeBidBtn) {
+                placeBidBtn.addEventListener('click', function() {
+                    alert('입찰 기능은 준비 중입니다.');
+                });
+            }
+            
+            // 입찰 입력 필드 이벤트
+            const bidInput = document.querySelector('.bid-input');
+            if (bidInput) {
+                bidInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        placeBidBtn.click();
+                    }
+                });
+            }
+            
+            // 교환 제안 버튼 이벤트
+            const submitTradeBtn = document.querySelector('.submit-trade-btn');
+            if (submitTradeBtn) {
+                submitTradeBtn.addEventListener('click', function() {
+                    alert('교환 제안 기능은 준비 중입니다.');
+                });
+            }
+            
+            // 업로드 버튼 이벤트
+            const uploadBtn = document.querySelector('.upload-btn');
+            if (uploadBtn) {
+                uploadBtn.addEventListener('click', function() {
+                    alert('파일 업로드 기능은 준비 중입니다.');
+                });
+            }
+        }
+        
+        function getRegisterHTML() {
+            return `
+                <div class="register-container">
+                    <!-- Header Section은 제거 -->
+
+                    <!-- Main Content -->
+                    <div class="register-main">
+                        <div class="register-form-container">
+                            <div class="form-header">
+                                <h2 class="form-title">Create your account</h2>
+                            </div>
+                            
+                            <div class="register-form">
+                                <div class="form-field">
+                                    <label class="field-label">Full Name</label>
+                                    <input type="text" class="form-input" placeholder="Enter your full name" id="fullNameInput">
+                                </div>
+                                
+                                <div class="form-field">
+                                    <label class="field-label">Email Address</label>
+                                    <input type="email" class="form-input" placeholder="Enter your email address" id="emailInput">
+                                </div>
+                                
+                                <div class="form-field">
+                                    <label class="field-label">Password</label>
+                                    <input type="password" class="form-input" placeholder="Create a password" id="passwordInput">
+                                </div>
+                                
+                                <div class="form-field">
+                                    <label class="field-label">Confirm Password</label>
+                                    <input type="password" class="form-input" placeholder="Confirm your password" id="confirmPasswordInput">
+                                </div>
+                                
+                                <div class="checkbox-field">
+                                    <div class="checkbox-container">
+                                        <input type="checkbox" class="checkbox-input" id="agreeCheckbox">
+                                        <label for="agreeCheckbox" class="checkbox-label">I agree to the Terms of Service and Privacy Policy</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button class="signup-btn" id="registerBtn">Sign Up</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function setupRegisterEvents() {
+            // 회원가입 버튼 이벤트
+            const registerBtn = document.getElementById('registerBtn');
+            if (registerBtn) {
+                registerBtn.addEventListener('click', function() {
+                    const fullName = document.getElementById('fullNameInput').value;
+                    const email = document.getElementById('emailInput').value;
+                    const password = document.getElementById('passwordInput').value;
+                    const confirmPassword = document.getElementById('confirmPasswordInput').value;
+                    const agreed = document.getElementById('agreeCheckbox').checked;
+                    
+                    // 간단한 유효성 검사
+                    if (!fullName || !email || !password || !confirmPassword) {
+                        alert('모든 필드를 입력해주세요.');
+                        return;
+                    }
+                    
+                    if (password !== confirmPassword) {
+                        alert('비밀번호가 일치하지 않습니다.');
+                        return;
+                    }
+                    
+                    if (!agreed) {
+                        alert('약관에 동의해주세요.');
+                        return;
+                    }
+                    
+                    alert('회원가입이 완료되었습니다! (데모)');
+                    navigateToPage('main');
+                });
+            }
+        }
+        
+        function getSignUpHTML() {
+            return `
+                <div class="signup-container">
+                    <!-- Header Section -->
+                    <header class="header signup-header">
+                        ${getCommonHeaderHTML()}
+                    </header>
+
+                    <!-- Main Content -->
+                    <div class="signup-main">
+                        <div class="signup-form-container">
+                            <div class="form-header">
+                                <h2 class="form-title">Join BidSwap</h2>
+                            </div>
+                            
+                            <div class="signup-options">
+                                <button class="social-btn apple-btn">
+                                    <span>Continue with Apple</span>
+                                </button>
+                                
+                                <button class="social-btn google-btn">
+                                    <span>Continue with SearchEngineCo</span>
+                                </button>
+                                
+                                <button class="social-btn greenline-btn">
+                                    <span>Continue with GreenLine</span>
+                                </button>
+                                
+                                <button class="social-btn browntalk-btn">
+                                    <span>Continue with BrownTalk</span>
+                                </button>
+                            </div>
+                            
+                            <div class="divider">
+                                <span class="divider-text">or</span>
+                            </div>
+                            
+                            <div class="primary-signup">
+                                <button class="signup-btn" id="signupBtn">Sign Up</button>
+                            </div>
+                            
+                            <div class="signin-link">
+                                <span>Already have an account? <a href="#" id="signinLink">Sign in</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 헤더 초기화
+        function initializeHeader() {
+            const headerElement = document.getElementById('mainHeader');
+            if (headerElement) {
+                headerElement.innerHTML = getCommonHeaderHTML();
+            }
+        }
+
+        // API 모킹 함수들
+        async function fetchFeaturedItems() {
+            try {
+                const response = await fetch('data/featured-items.json');
+                const data = await response.json();
+                return data.slice(0, 10); // 첫 10개 표시
+            } catch (error) {
+                console.error('Failed to fetch featured items:', error);
+                return [];
+            }
+        }
+
+        async function fetchEndingSoonItems() {
+            try {
+                const response = await fetch('data/ending-soon.json');
+                const data = await response.json();
+                return data.slice(0, 10); // 첫 10개 표시
+            } catch (error) {
+                console.error('Failed to fetch ending soon items:', error);
+                return [];
+            }
+        }
+
+        // 아이템 카드 HTML 생성 (Featured Items용)
+        function createFeaturedItemCard(item) {
+            return `
+                <div class="item-card" data-item-id="${item.id}">
+                    <div class="item-image">
+                        <img src="${item.image}" alt="${item.title}">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-title">${item.title}</h3>
+                        <p class="item-bid">Current Bid: $${item.currentBid.toLocaleString()}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 아이템 카드 HTML 생성 (Ending Soon용)
+        function createEndingSoonItemCard(item) {
+            return `
+                <div class="item-card-small" data-item-id="${item.id}">
+                    <div class="item-image-small">
+                        <img src="${item.image}" alt="${item.title}">
+                    </div>
+                    <div class="item-info">
+                        <h3 class="item-title">${item.title}</h3>
+                        <p class="item-bid">Current Bid: $${item.currentBid}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Featured Items 섹션 렌더링
+        async function renderFeaturedItems() {
+            const featuredContainer = document.querySelector('.featured-section .items-grid');
+            if (!featuredContainer) return;
+
+            // 로딩 상태 표시
+            featuredContainer.innerHTML = '<div class="loading">Loading featured items...</div>';
+
+            const items = await fetchFeaturedItems();
+            
+            if (items.length === 0) {
+                featuredContainer.innerHTML = '<div class="no-items">No featured items available</div>';
+                return;
+            }
+
+            featuredContainer.innerHTML = items.map(item => createFeaturedItemCard(item)).join('');
+            
+            // 드래그 스크롤 기능 추가
+            addDragScrolling(featuredContainer);
+            
+            // 카드 클릭 이벤트 추가
+            featuredContainer.querySelectorAll('.item-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // 드래그 중이면 클릭 이벤트 무시
+                    if (featuredContainer.isDragging) {
+                        return;
+                    }
+                    
+                    const itemId = this.dataset.itemId;
+                    console.log('Featured item clicked:', itemId);
+                    showItemDetailPage(itemId, 'featured');
+                });
+            });
+        }
+
+        // Ending Soon 섹션 렌더링
+        async function renderEndingSoonItems() {
+            const endingContainer = document.querySelector('.ending-soon-section .items-grid-small');
+            if (!endingContainer) return;
+
+            // 로딩 상태 표시
+            endingContainer.innerHTML = '<div class="loading">Loading ending soon items...</div>';
+
+            const items = await fetchEndingSoonItems();
+            
+            if (items.length === 0) {
+                endingContainer.innerHTML = '<div class="no-items">No ending soon items available</div>';
+                return;
+            }
+
+            endingContainer.innerHTML = items.map(item => createEndingSoonItemCard(item)).join('');
+            
+            // 드래그 스크롤 기능 추가
+            addDragScrolling(endingContainer);
+            
+            // 카드 클릭 이벤트 추가
+            endingContainer.querySelectorAll('.item-card-small').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // 드래그 중이면 클릭 이벤트 무시
+                    if (endingContainer.isDragging) {
+                        return;
+                    }
+                    
+                    const itemId = this.dataset.itemId;
+                    console.log('Ending soon item clicked:', itemId);
+                    showItemDetailPage(itemId, 'ending-soon');
+                });
+            });
+        }
+
+        // 드래그 스크롤 기능 추가
+        function addDragScrolling(container) {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+            let isDragging = false;
+
+            container.addEventListener('mousedown', (e) => {
+                isDown = true;
+                isDragging = false;
+                container.style.cursor = 'grabbing';
+                container.style.userSelect = 'none';
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+                e.preventDefault();
+            });
+
+            container.addEventListener('mouseleave', () => {
+                isDown = false;
+                container.style.cursor = 'grab';
+                container.style.userSelect = 'auto';
+            });
+
+            container.addEventListener('mouseup', () => {
+                isDown = false;
+                container.style.cursor = 'grab';
+                container.style.userSelect = 'auto';
+                
+                // 드래그 상태를 컨테이너에 저장
+                container.isDragging = isDragging;
+                
+                // 잠시 후 드래그 상태 초기화 (클릭 이벤트가 발생한 후)
+                setTimeout(() => {
+                    container.isDragging = false;
+                }, 10);
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2; // 스크롤 속도 조정
+                
+                // 일정 거리 이상 움직이면 드래그로 판단
+                if (Math.abs(walk) > 5) {
+                    isDragging = true;
+                }
+                
+                container.scrollLeft = scrollLeft - walk;
+            });
+
+            // 초기 커서 설정
+            container.style.cursor = 'grab';
+
+            // 카드에는 포인터 커서 유지
+            container.querySelectorAll('.item-card, .item-card-small').forEach(card => {
+                card.style.cursor = 'pointer';
+            });
+        }
+        
+        // 검색 히스토리 관리
+        let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+        
+        function initializeSearchFunctionality() {
+            const searchInput = document.querySelector('.search-input-large');
+            if (!searchInput) return;
+            
+            // 검색 입력 이벤트
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const searchTerm = this.value.trim();
+                    if (searchTerm) {
+                        addToSearchHistory(searchTerm);
+                        // 실제 검색 기능은 여기에 추가
+                        console.log('검색:', searchTerm);
+                        this.value = '';
+                        // 검색 후 히스토리 업데이트
+                        renderSearchHistory();
+                    }
+                }
+            });
+            
+            // 페이지 로드 시 기존 히스토리 표시
+            renderSearchHistory();
+        }
+        
+        function addToSearchHistory(searchTerm) {
+            // 중복 제거
+            searchHistory = searchHistory.filter(term => term !== searchTerm);
+            // 맨 앞에 추가
+            searchHistory.unshift(searchTerm);
+            // 최대 10개까지만 저장
+            if (searchHistory.length > 10) {
+                searchHistory = searchHistory.slice(0, 10);
+            }
+            // 로컬 스토리지에 저장
+            localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+        }
+        
+        function removeFromSearchHistory(searchTerm) {
+            searchHistory = searchHistory.filter(term => term !== searchTerm);
+            localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+            renderSearchHistory();
+        }
+        
+        function renderSearchHistory() {
+            const historyContainer = document.getElementById('searchHistoryTags');
+            const historySection = document.getElementById('searchHistorySection');
+            
+            if (searchHistory.length === 0) {
+                historySection.style.display = 'none';
+                return;
+            }
+            
+            historySection.style.display = 'block';
+            historyContainer.innerHTML = searchHistory.map(term => `
+                <div class="search-history-tag">
+                    <span class="history-text" onclick="searchFromHistory('${term}')">${term}</span>
+                    <button class="history-remove-btn" onclick="removeFromSearchHistory('${term}')" title="Remove">×</button>
+                </div>
+            `).join('');
+        }
+        
+        function searchFromHistory(searchTerm) {
+            const searchInput = document.querySelector('.search-input-large');
+            if (searchInput) {
+                searchInput.value = searchTerm;
+                // 검색 실행
+                addToSearchHistory(searchTerm);
+                console.log('히스토리에서 검색:', searchTerm);
+                searchInput.value = '';
+                renderSearchHistory();
+            }
+        }
+
+        // DOM이 로드된 후 이벤트 리스너 설정
+        document.addEventListener('DOMContentLoaded', async function() {
+            // 헤더 초기화
+            initializeHeader();
+            
+            // 검색 기능 초기화
+            initializeSearchFunctionality();
+            
+            // 아이템들 렌더링
+            await Promise.all([
+                renderFeaturedItems(),
+                renderEndingSoonItems()
+            ]);
+            
+            console.log('SPA 라우팅 시스템이 초기화되었습니다.');
+        });
+    </script>
 </body>
 </html>
