@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { HeaderProps } from "@/types";
 import SearchBar from "./SearchBar";
 import Button from "./ui/Button";
 import { DESIGN_TOKENS, commonStyles } from "@/constants/design-tokens";
 import { useNavigation } from "@/hooks/useNavigation";
+import { useUser } from "@/store/AppContext";
 
 const Header: React.FC<HeaderProps> = ({ onNavigate, currentUser }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [, setUser] = useUser();
   const { navigateToHome, navigateToSignIn, navigateToSearch } = useNavigation();
+  const userMenuRef = useRef<HTMLDivElement>(null);
 
   const handleLogoClick = () => {
     navigateToHome();
@@ -26,6 +30,33 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentUser }) => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const handleLogout = () => {
+    setUser(null);
+    setShowUserMenu(false);
+    navigateToHome();
+  };
+
+  const toggleUserMenu = () => {
+    setShowUserMenu(!showUserMenu);
+  };
+
+  // 외부 클릭 시 드롭다운 메뉴 닫기
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setShowUserMenu(false);
+      }
+    };
+
+    if (showUserMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showUserMenu]);
 
   return (
     <header style={commonStyles.header} id="mainHeader">
@@ -121,12 +152,29 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentUser }) => {
             >
               Contact
             </button>
+            {/* My Bid 버튼 (로그인된 사용자에게만 표시) */}
+            {currentUser && (
+              <button
+                style={{
+                  ...commonStyles.text.body,
+                  fontWeight: DESIGN_TOKENS.fontWeights.medium,
+                  fontSize: DESIGN_TOKENS.fontSizes.sm,
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: DESIGN_TOKENS.colors.primary
+                }}
+                onClick={() => handleNavigation("/my-bids")}
+              >
+                My Bid
+              </button>
+            )}
           </nav>
 
           {/* 사용자 액션 버튼들 */}
           <div style={{ display: 'flex', gap: DESIGN_TOKENS.spacing.sm }}>
             {currentUser ? (
-              <div className="relative">
+              <div ref={userMenuRef} style={{ position: 'relative' }}>
                 <button
                   style={{
                     width: DESIGN_TOKENS.spacing['4xl'],
@@ -142,6 +190,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentUser }) => {
                     cursor: 'pointer',
                     transition: DESIGN_TOKENS.layout.transitions.normal,
                   }}
+                  onClick={toggleUserMenu}
                 >
                   {currentUser.avatar ? (
                     <img
@@ -158,6 +207,90 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentUser }) => {
                     <span>{currentUser.name.charAt(0).toUpperCase()}</span>
                   )}
                 </button>
+
+                {/* 유저 드롭다운 메뉴 */}
+                {showUserMenu && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '100%',
+                    right: 0,
+                    marginTop: DESIGN_TOKENS.spacing.xs,
+                    backgroundColor: DESIGN_TOKENS.colors.white,
+                    border: `1px solid ${DESIGN_TOKENS.colors.border}`,
+                    borderRadius: DESIGN_TOKENS.layout.borderRadius.md,
+                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                    zIndex: 50,
+                    minWidth: '180px'
+                  }}>
+                    <div style={{
+                      padding: `${DESIGN_TOKENS.spacing.sm} ${DESIGN_TOKENS.spacing.lg}`,
+                      borderBottom: `1px solid ${DESIGN_TOKENS.colors.border}`
+                    }}>
+                      <div style={{
+                        fontSize: DESIGN_TOKENS.fontSizes.sm,
+                        fontWeight: DESIGN_TOKENS.fontWeights.medium,
+                        color: DESIGN_TOKENS.colors.dark
+                      }}>
+                        {currentUser.name}
+                      </div>
+                      <div style={{
+                        fontSize: DESIGN_TOKENS.fontSizes.xs,
+                        color: DESIGN_TOKENS.colors.secondary
+                      }}>
+                        {currentUser.email}
+                      </div>
+                    </div>
+                    <div style={{ padding: DESIGN_TOKENS.spacing.xs }}>
+                      <button
+                        style={{
+                          width: '100%',
+                          padding: `${DESIGN_TOKENS.spacing.sm} ${DESIGN_TOKENS.spacing.lg}`,
+                          textAlign: 'left',
+                          background: 'none',
+                          border: 'none',
+                          cursor: 'pointer',
+                          fontSize: DESIGN_TOKENS.fontSizes.sm,
+                          color: DESIGN_TOKENS.colors.dark,
+                          borderRadius: DESIGN_TOKENS.layout.borderRadius.sm
+                        }}
+                        onClick={() => {
+                          handleNavigation('/profile');
+                          setShowUserMenu(false);
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = DESIGN_TOKENS.colors.light;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }}
+                      >
+                        Profile
+                      </button>
+                      <button
+                        style={{
+                          width: '100%',
+                          padding: `${DESIGN_TOKENS.spacing.sm} ${DESIGN_TOKENS.spacing.lg}`,
+                          textAlign: 'left',
+                          background: 'none',
+                          border: 'none',
+                          cursor: 'pointer',
+                          fontSize: DESIGN_TOKENS.fontSizes.sm,
+                          color: DESIGN_TOKENS.colors.error,
+                          borderRadius: DESIGN_TOKENS.layout.borderRadius.sm
+                        }}
+                        onClick={handleLogout}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = DESIGN_TOKENS.colors.errorBg;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }}
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <Button

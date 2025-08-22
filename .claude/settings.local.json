@@ -34,7 +34,8 @@
       "mcp__context7__resolve-library-id",
       "mcp__context7__get-library-docs",
       "Bash(npm test)",
-      "mcp__Framelink_Figma_MCP__download_figma_images"
+      "mcp__Framelink_Figma_MCP__download_figma_images",
+      "mcp__serena__think_about_task_adherence"
     ],
     "deny": [],
     "ask": [],

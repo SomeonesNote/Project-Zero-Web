@@ -1,9 +1,9 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-import { AppProvider } from '@/store/AppContext';
+import { AppProvider, useUser } from '@/store/AppContext';
 import { queryClient } from '@/services/queryClient';
 import Header from '@/components/Header';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -17,18 +17,22 @@ const SignUpPage = lazy(() => import('@/pages/SignUpPage'));
 const SignInPage = lazy(() => import('@/pages/SignInPage'));
 const ProfilePage = lazy(() => import('@/pages/ProfilePage'));
 const CategoriesPage = lazy(() => import('@/pages/CategoriesPage'));
+const MyBidPage = lazy(() => import('@/pages/MyBidPage'));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
 
 function AppContent(): JSX.Element {
+  const [currentUser] = useUser();
+  const navigate = useNavigate();
+  
   const handleNavigation = (path: string) => {
-    // React Router의 navigate 기능을 사용
-    window.location.href = path;
+    // React Router의 navigate 기능을 사용하여 SPA 방식으로 이동
+    navigate(path);
   };
 
   return (
     <div className="app">
       <ErrorBoundary>
-        <Header onNavigate={handleNavigation} />
+        <Header onNavigate={handleNavigation} currentUser={currentUser} />
         
         <main className="main-content">
           <Suspense fallback={<LoadingSpinner />}>
@@ -52,6 +56,7 @@ function AppContent(): JSX.Element {
               
               {/* 사용자 페이지들 */}
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/my-bids" element={<MyBidPage />} />
               
               {/* 리다이렉트 */}
               <Route path="/register" element={<Navigate to="/signup" replace />} />
