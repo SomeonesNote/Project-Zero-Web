@@ -1,0 +1,90 @@
+[
+  {
+    "id": "ending-001",
+    "title": "Vintage Baseball Card Collection",
+    "description": "Rare 1960s baseball cards including rookie cards",
+    "image": "/images/baseball.jpg",
+    "currentBid": 1250,
+    "startingBid": 500,
+    "totalBids": 28,
+    "seller": {
+      "id": "seller-005",
+      "name": "SportsCards Pro",
+      "rating": 4.5,
+      "totalSales": 92
+    },
+    "location": "Chicago, IL",
+    "condition": "vintage",
+    "tags": ["sports", "baseball", "cards", "collectibles"],
+    "endTime": "2024-02-11T09:15:00Z",
+    "category": "collectibles",
+    "featured": false,
+    "endingSoon": true
+  },
+  {
+    "id": "ending-002",
+    "title": "Designer Handbag Collection",
+    "description": "Authentic Louis Vuitton and Chanel handbags",
+    "image": "/images/handbag.jpg",
+    "currentBid": 3200,
+    "startingBid": 2000,
+    "totalBids": 42,
+    "seller": {
+      "id": "seller-006",
+      "name": "LuxuryBags",
+      "rating": 4.8,
+      "totalSales": 167
+    },
+    "location": "Miami, FL",
+    "condition": "used",
+    "tags": ["fashion", "handbags", "luxury", "designer"],
+    "endTime": "2024-02-11T14:30:00Z",
+    "category": "fashion",
+    "featured": false,
+    "endingSoon": true
+  },
+  {
+    "id": "ending-003",
+    "title": "Abstract Modern Painting",
+    "description": "Original abstract painting by emerging artist",
+    "image": "/images/painting.jpg",
+    "currentBid": 850,
+    "startingBid": 400,
+    "totalBids": 15,
+    "seller": {
+      "id": "seller-007",
+      "name": "ArtGalleryNYC",
+      "rating": 4.6,
+      "totalSales": 73
+    },
+    "location": "New York, NY",
+    "condition": "new",
+    "tags": ["art", "painting", "modern", "abstract"],
+    "endTime": "2024-02-11T16:45:00Z",
+    "category": "art",
+    "featured": false,
+    "endingSoon": true
+  },
+  {
+    "id": "ending-004",
+    "title": "Living Room Furniture Set",
+    "description": "Complete modern living room furniture set including sofa and coffee table",
+    "image": "/images/living-room.jpg",
+    "currentBid": 1800,
+    "startingBid": 1200,
+    "totalBids": 12,
+    "seller": {
+      "id": "seller-008",
+      "name": "ModernFurniture",
+      "rating": 4.4,
+      "totalSales": 45
+    },
+    "location": "Portland, OR",
+    "condition": "used",
+    "tags": ["furniture", "living-room", "modern", "home"],
+    "endTime": "2024-02-11T19:00:00Z",
+    "category": "home",
+    "featured": false,
+    "endingSoon": true
+  }
+]

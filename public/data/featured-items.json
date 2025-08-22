@@ -1,0 +1,90 @@
+[
+  {
+    "id": "featured-001",
+    "title": "Vintage Rolex Watch Collection",
+    "description": "Rare collection of vintage Rolex watches from the 1960s-1980s",
+    "image": "/images/pocket-watch.jpg",
+    "currentBid": 15000,
+    "startingBid": 8000,
+    "totalBids": 47,
+    "seller": {
+      "id": "seller-001",
+      "name": "WatchCollector99",
+      "rating": 4.8,
+      "totalSales": 156
+    },
+    "location": "New York, NY",
+    "condition": "vintage",
+    "tags": ["watches", "luxury", "vintage", "rolex"],
+    "endTime": "2024-02-15T18:30:00Z",
+    "category": "jewelry",
+    "featured": true,
+    "endingSoon": false
+  },
+  {
+    "id": "featured-002",
+    "title": "Classic 1965 Ford Mustang",
+    "description": "Fully restored classic Mustang with original engine",
+    "image": "/images/mustang.jpg",
+    "currentBid": 45000,
+    "startingBid": 35000,
+    "totalBids": 23,
+    "seller": {
+      "id": "seller-002",
+      "name": "ClassicCarGuru",
+      "rating": 4.9,
+      "totalSales": 89
+    },
+    "location": "Detroit, MI",
+    "condition": "used",
+    "tags": ["cars", "classic", "vintage", "ford"],
+    "endTime": "2024-02-12T20:00:00Z",
+    "category": "automotive",
+    "featured": true,
+    "endingSoon": false
+  },
+  {
+    "id": "featured-003",
+    "title": "Diamond Engagement Ring Set",
+    "description": "2.5 carat princess cut diamond with matching wedding band",
+    "image": "/images/diamond-ring.jpg",
+    "currentBid": 8500,
+    "startingBid": 6000,
+    "totalBids": 34,
+    "seller": {
+      "id": "seller-003",
+      "name": "LuxuryJewels",
+      "rating": 4.7,
+      "totalSales": 203
+    },
+    "location": "Los Angeles, CA",
+    "condition": "new",
+    "tags": ["jewelry", "diamond", "engagement", "wedding"],
+    "endTime": "2024-02-18T15:45:00Z",
+    "category": "jewelry",
+    "featured": true,
+    "endingSoon": false
+  },
+  {
+    "id": "featured-004",
+    "title": "Vintage Camera Collection",
+    "description": "Professional vintage cameras including Leica and Canon models",
+    "image": "/images/camera.jpg",
+    "currentBid": 2800,
+    "startingBid": 1500,
+    "totalBids": 18,
+    "seller": {
+      "id": "seller-004",
+      "name": "PhotoCollector",
+      "rating": 4.6,
+      "totalSales": 78
+    },
+    "location": "Seattle, WA",
+    "condition": "vintage",
+    "tags": ["cameras", "vintage", "photography", "collectibles"],
+    "endTime": "2024-02-16T12:30:00Z",
+    "category": "electronics",
+    "featured": true,
+    "endingSoon": false
+  }
+]

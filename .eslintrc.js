@@ -8,11 +8,15 @@ module.exports = {
   },
   plugins: [
     '@typescript-eslint',
-    'prettier'
+    'prettier',
+    'react',
+    'react-hooks'
   ],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
     'prettier'
   ],
   rules: {
@@ -22,13 +26,25 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-inferrable-types': 'off',
     'prefer-const': 'error',
-    'no-var': 'error'
+    'no-var': 'error',
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn'
+  },
+  settings: {
+    react: {
+      version: 'detect'
+    }
   },
   ignorePatterns: [
     'dist/**/*',
     'node_modules/**/*',
-    '*.js',
-    '*.html'
+    '*.html',
+    'vite.config.ts',
+    'postcss.config.js',
+    'tailwind.config.js',
+    'jest.config.js'
   ],
   env: {
     browser: true,

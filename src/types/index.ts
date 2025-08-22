@@ -203,6 +203,102 @@ export interface AppConfig {
   defaultItemsPerPage?: number;
 }
 
+// React 전용 타입들
+export interface ReactSearchEventHandlers {
+  onSearch: (term: string) => void;
+  onSearchInput?: (term: string) => void;
+}
+
+export interface ReactItemEventHandlers {
+  onItemClick: (item: Item) => void;
+  onBidClick: (item: Item) => void;
+}
+
+export interface ReactCategoryEventHandlers {
+  onCategoryChange: (categories: string[]) => void;
+}
+
+export interface ReactPaginationEventHandlers {
+  onPageChange: (page: number) => void;
+}
+
+// React 컴포넌트 Props 타입들
+export interface ItemCardProps extends ReactItemEventHandlers {
+  item: Item;
+  size?: "small" | "medium" | "large";
+  showBidButton?: boolean;
+  className?: string;
+}
+
+export interface SearchBarProps extends ReactSearchEventHandlers {
+  placeholder?: string;
+  size?: "small" | "medium" | "large";
+  initialValue?: string;
+  className?: string;
+}
+
+export interface HeaderProps {
+  onNavigate: (path: string) => void;
+  currentUser?: User | null;
+}
+
+export interface CategoryTagsProps extends ReactCategoryEventHandlers {
+  categories: Category[];
+  selectedCategories?: string[];
+  multiSelect?: boolean;
+  className?: string;
+}
+
+export interface PaginationProps extends ReactPaginationEventHandlers {
+  currentPage: number;
+  totalItems: number;
+  itemsPerPage: number;
+  maxVisiblePages?: number;
+  className?: string;
+}
+
+export interface ItemGridProps extends ReactItemEventHandlers {
+  items: Item[];
+  loading?: boolean;
+  error?: string | null;
+  className?: string;
+}
+
+// 사용자 인터페이스
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar?: string;
+  isAuthenticated: boolean;
+}
+
+// 앱 상태 관리
+export interface AppState {
+  user: User | null;
+  currentPage: string;
+  searchHistory: string[];
+  items: Item[];
+  categories: Category[];
+  filters: FilterInfo;
+  pagination: PaginationInfo;
+  loading: boolean;
+  error: string | null;
+}
+
+export interface AppAction {
+  type: string;
+  payload?: any;
+}
+
+// React Query 관련
+export interface QueryOptions {
+  staleTime?: number;
+  cacheTime?: number;
+  refetchOnWindowFocus?: boolean;
+  retry?: number;
+}
+
 // 개발자 도구
 export interface DeveloperUtils {
   getAPI(): any;
