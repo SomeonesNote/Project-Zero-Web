@@ -1,9 +1,0 @@
-/* MainPage 전용 스타일 */
-.horizontal-scroll-container::-webkit-scrollbar {
-  display: none;
-}
-
-.horizontal-scroll-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
