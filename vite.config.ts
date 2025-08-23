@@ -17,7 +17,9 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    port: 5173,
+    host: true,
+    strictPort: true, // 포트가 사용중이면 오류 발생 (자동 변경 방지)
     open: true,
   },
   build: {

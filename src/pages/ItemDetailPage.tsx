@@ -199,7 +199,7 @@ const ItemDetailPage: React.FC = () => {
                 overflow: 'hidden'
               }}>
                 <img 
-                  src={item.image || item.imageUrl || '/images/placeholder.png'} 
+                  src={item.image || item.imageUrl || (item.images && item.images[0]) || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xNzUgMTI1SDIyNVYxNzVIMTc1VjEyNVoiIGZpbGw9IiM5QjlDQTAiLz4KPHBhdGggZD0iTTIwMCAxNTBMMTg1IDE2NUgyMTVMMjAwIDE1MFoiIGZpbGw9IiM2ODcwNzYiLz4KPHA+dGV4dCB4PSIyMDAiIHk9IjIwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzY4NzA3NiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0Ij5ObyBJbWFnZTwvdGV4dD4KPHN2Zz4='} 
                   alt={item.title || item.name}
                   style={{ 
                     width: '100%', 
@@ -208,7 +208,7 @@ const ItemDetailPage: React.FC = () => {
                     borderRadius: '8px'
                   }}
                   onError={(e) => {
-                    e.currentTarget.src = '/images/placeholder.png';
+                    e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xNzUgMTI1SDIyNVYxNzVIMTc1VjEyNVoiIGZpbGw9IiM5QjlDQTAiLz4KPHBhdGggZD0iTTIwMCAxNTBMMTg1IDE2NUgyMTVMMjAwIDE1MFoiIGZpbGw9IiM2ODcwNzYiLz4KPHA+dGV4dCB4PSIyMDAiIHk9IjIwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzY4NzA3NiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0Ij5ObyBJbWFnZTwvdGV4dD4KPHN2Zz4=';
                   }}
                 />
               </div>
@@ -976,19 +976,19 @@ const ItemDetailPage: React.FC = () => {
                 }}>
                   {[
                     {
-                      image: '/images/vintage-camera.jpg',
+                      image: 'https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=400',
                       title: 'Vintage Camera',
                       description: 'A vintage camera in good condition',
                       color: '#FF6B6B'
                     },
                     {
-                      image: '/images/antique-coins.jpg',
+                      image: 'https://images.unsplash.com/photo-1622544221926-50c4840a1a30?w=400',
                       title: 'Antique Coin Set',
                       description: 'A set of antique coins',
                       color: '#4ECDC4'
                     },
                     {
-                      image: '/images/signed-baseball.jpg',
+                      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400',
                       title: 'Signed Baseball',
                       description: 'A signed baseball',
                       color: '#45B7D1'

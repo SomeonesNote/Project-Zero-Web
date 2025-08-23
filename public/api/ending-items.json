@@ -1,0 +1,127 @@
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "id": "item-101",
+        "title": "Vintage Record Player",
+        "description": "Classic turntable from the 1980s, recently serviced and in working condition.",
+        "images": [
+          "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400"
+        ],
+        "currentBid": 275,
+        "startingBid": 150,
+        "endTime": "2024-12-20T23:59:59Z",
+        "status": "ended",
+        "category": {
+          "id": "cat-006",
+          "name": "Music & Entertainment",
+          "slug": "music"
+        },
+        "seller": {
+          "id": "user-101",
+          "name": "음악애호가",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.7
+        },
+        "bidCount": 14,
+        "watchers": 28,
+        "timeLeft": "Ended",
+        "winner": {
+          "id": "user-201",
+          "name": "김**"
+        }
+      },
+      {
+        "id": "item-102",
+        "title": "Designer Sunglasses",
+        "description": "Ray-Ban aviator sunglasses, limited edition with original case.",
+        "images": [
+          "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400"
+        ],
+        "currentBid": 120,
+        "startingBid": 80,
+        "endTime": "2024-12-20T20:30:00Z",
+        "status": "ended",
+        "category": {
+          "id": "cat-004",
+          "name": "Fashion & Accessories",
+          "slug": "fashion"
+        },
+        "seller": {
+          "id": "user-102",
+          "name": "스타일리스트",
+          "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.8
+        },
+        "bidCount": 9,
+        "watchers": 15,
+        "timeLeft": "Ended",
+        "winner": {
+          "id": "user-202",
+          "name": "이**"
+        }
+      },
+      {
+        "id": "item-103",
+        "title": "Vintage Camera Lens",
+        "description": "Canon FD 50mm f/1.4 lens in excellent condition with original caps.",
+        "images": [
+          "https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=400"
+        ],
+        "currentBid": 180,
+        "startingBid": 100,
+        "endTime": "2024-12-20T18:15:00Z",
+        "status": "ended",
+        "category": {
+          "id": "cat-001",
+          "name": "Cameras & Photography",
+          "slug": "cameras"
+        },
+        "seller": {
+          "id": "user-103",
+          "name": "사진작가",
+          "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.9
+        },
+        "bidCount": 7,
+        "watchers": 22,
+        "timeLeft": "Ended",
+        "winner": {
+          "id": "user-203",
+          "name": "박**"
+        }
+      },
+      {
+        "id": "item-104",
+        "title": "Collectible Action Figure",
+        "description": "Limited edition superhero figure, mint condition in original packaging.",
+        "images": [
+          "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400"
+        ],
+        "currentBid": 95,
+        "startingBid": 50,
+        "endTime": "2024-12-20T16:45:00Z",
+        "status": "ended",
+        "category": {
+          "id": "cat-003",
+          "name": "Sports & Collectibles",
+          "slug": "sports"
+        },
+        "seller": {
+          "id": "user-104",
+          "name": "수집가",
+          "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.6
+        },
+        "bidCount": 12,
+        "watchers": 18,
+        "timeLeft": "Ended",
+        "winner": {
+          "id": "user-204",
+          "name": "최**"
+        }
+      }
+    ]
+  }
+}
