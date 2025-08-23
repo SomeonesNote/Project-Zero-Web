@@ -1,0 +1,79 @@
+{
+  "success": true,
+  "data": {
+    "categories": [
+      {
+        "id": "cat-001",
+        "name": "Cameras & Photography",
+        "slug": "cameras",
+        "description": "Vintage and modern cameras, lenses, and photography equipment",
+        "image": "https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=300",
+        "itemCount": 145,
+        "parentId": null
+      },
+      {
+        "id": "cat-002",
+        "name": "Watches & Jewelry",
+        "slug": "watches",
+        "description": "Luxury watches, vintage timepieces, and fine jewelry",
+        "image": "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=300",
+        "itemCount": 89,
+        "parentId": null
+      },
+      {
+        "id": "cat-003",
+        "name": "Sports & Collectibles",
+        "slug": "sports",
+        "description": "Sports memorabilia, trading cards, and collectible items",
+        "image": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300",
+        "itemCount": 234,
+        "parentId": null
+      },
+      {
+        "id": "cat-004",
+        "name": "Fashion & Accessories",
+        "slug": "fashion",
+        "description": "Designer clothing, handbags, and fashion accessories",
+        "image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=300",
+        "itemCount": 178,
+        "parentId": null
+      },
+      {
+        "id": "cat-005",
+        "name": "Coins & Currency",
+        "slug": "coins",
+        "description": "Rare coins, paper money, and numismatic collectibles",
+        "image": "https://images.unsplash.com/photo-1622544221926-50c4840a1a30?w=300",
+        "itemCount": 67,
+        "parentId": null
+      },
+      {
+        "id": "cat-006",
+        "name": "Toys & Models",
+        "slug": "toys",
+        "description": "Vintage toys, model cars, and collectible figures",
+        "image": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=300",
+        "itemCount": 156,
+        "parentId": null
+      },
+      {
+        "id": "cat-007",
+        "name": "Art & Antiques",
+        "slug": "art",
+        "description": "Fine art, paintings, sculptures, and antique items",
+        "image": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300",
+        "itemCount": 98,
+        "parentId": null
+      },
+      {
+        "id": "cat-008",
+        "name": "Electronics",
+        "slug": "electronics",
+        "description": "Vintage electronics, audio equipment, and tech gadgets",
+        "image": "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=300",
+        "itemCount": 203,
+        "parentId": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "id": "item-001",
+        "title": "Vintage Leica M3 Camera",
+        "description": "Rare vintage Leica M3 35mm rangefinder camera in excellent condition.",
+        "images": [
+          "https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=400"
+        ],
+        "currentBid": 1250,
+        "startingBid": 500,
+        "endTime": "2024-12-31T23:59:59Z",
+        "status": "active",
+        "category": {
+          "id": "cat-001",
+          "name": "Cameras & Photography",
+          "slug": "cameras"
+        },
+        "seller": {
+          "id": "user-001",
+          "name": "김민수",
+          "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.8
+        },
+        "bidCount": 15,
+        "watchers": 23,
+        "createdAt": "2024-12-23T10:30:00Z"
+      },
+      {
+        "id": "item-003",
+        "title": "Vintage Baseball Card Collection",
+        "description": "Complete set of 1952 Topps baseball cards including Mickey Mantle rookie card.",
+        "images": [
+          "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400"
+        ],
+        "currentBid": 3200,
+        "startingBid": 1500,
+        "endTime": "2024-12-28T20:00:00Z",
+        "status": "active",
+        "category": {
+          "id": "cat-003",
+          "name": "Sports & Collectibles",
+          "slug": "sports"
+        },
+        "seller": {
+          "id": "user-003",
+          "name": "이영희",
+          "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.7
+        },
+        "bidCount": 25,
+        "watchers": 45,
+        "createdAt": "2024-12-23T09:15:00Z"
+      },
+      {
+        "id": "item-005",
+        "title": "Rare Coin Collection",
+        "description": "Collection of rare US silver dollars from 1878-1921.",
+        "images": [
+          "https://images.unsplash.com/photo-1622544221926-50c4840a1a30?w=400"
+        ],
+        "currentBid": 1850,
+        "startingBid": 800,
+        "endTime": "2024-12-26T19:45:00Z",
+        "status": "active",
+        "category": {
+          "id": "cat-005",
+          "name": "Coins & Currency",
+          "slug": "coins"
+        },
+        "seller": {
+          "id": "user-005",
+          "name": "박철수",
+          "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.9
+        },
+        "bidCount": 18,
+        "watchers": 35,
+        "createdAt": "2024-12-23T08:00:00Z"
+      },
+      {
+        "id": "item-007",
+        "title": "Modern Art Painting",
+        "description": "Contemporary abstract painting by emerging artist, oil on canvas 24x36 inches.",
+        "images": [
+          "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400"
+        ],
+        "currentBid": 420,
+        "startingBid": 200,
+        "endTime": "2024-12-30T20:00:00Z",
+        "status": "active",
+        "category": {
+          "id": "cat-007",
+          "name": "Art & Antiques",
+          "slug": "art"
+        },
+        "seller": {
+          "id": "user-007",
+          "name": "예술가협회",
+          "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.8
+        },
+        "bidCount": 12,
+        "watchers": 20,
+        "createdAt": "2024-12-23T07:30:00Z"
+      }
+    ]
+  }
+}

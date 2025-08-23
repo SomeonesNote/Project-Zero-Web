@@ -5,11 +5,14 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { DESIGN_TOKENS, commonStyles } from "@/constants/design-tokens";
 import { useNavigation } from "@/hooks/useNavigation";
-import { authenticateUser } from "@/data/users";
+import { authenticateUser } from "@/services/apiService";
+import { useToast } from "@/store/ToastContext";
+import { saveTokens } from "@/utils/auth";
 
 const SignInPage: React.FC = () => {
   const [, setUser] = useUser();
   const { navigateToHome, navigateToSignUp } = useNavigation();
+  const { showSuccess, showError } = useToast();
   
   // 이메일 로그인 상태
   const [showEmailLogin, setShowEmailLogin] = useState(false);
@@ -22,13 +25,15 @@ const SignInPage: React.FC = () => {
 
   const handleSocialLogin = (provider: string) => {
     // 데모용 로그인 처리
-    setUser({
+    const user = {
       id: "1",
       name: "Demo User",
       email: `user@${provider.toLowerCase()}.com`,
       isAuthenticated: true,
-    });
-    navigateToHome();
+    };
+    setUser(user);
+    showSuccess("로그인 성공", `${provider} 계정으로 로그인했습니다!`);
+    setTimeout(() => navigateToHome(), 1000);
   };
 
   const handleSignUp = () => {
@@ -77,16 +82,28 @@ const SignInPage: React.FC = () => {
     setErrors({});
     
     try {
-      // 사용자 인증
-      const user = authenticateUser(formData.email, formData.password);
+      // JWT 기반 사용자 인증
+      const authResult = await authenticateUser(formData.email, formData.password);
       
-      if (user) {
-        setUser(user);
-        navigateToHome();
+      if (authResult) {
+        // JWT 토큰 저장
+        saveTokens({
+          token: authResult.token,
+          refreshToken: authResult.refreshToken,
+          expiresAt: authResult.expiresAt
+        });
+        
+        // 사용자 정보 상태 업데이트
+        setUser(authResult.user);
+        showSuccess("로그인 성공", `${authResult.user.name}님, 환영합니다!`);
+        setTimeout(() => navigateToHome(), 1000);
       } else {
+        showError("로그인 실패", "이메일 또는 비밀번호가 잘못되었습니다.");
         setErrors({ general: "이메일 또는 비밀번호가 잘못되었습니다." });
       }
     } catch (error) {
+      console.error('로그인 오류:', error);
+      showError("로그인 오류", "로그인 중 오류가 발생했습니다.");
       setErrors({ general: "로그인 중 오류가 발생했습니다." });
     } finally {
       setIsLoading(false);

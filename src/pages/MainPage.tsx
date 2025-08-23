@@ -1,12 +1,13 @@
 import React, { useRef, useState, useCallback, memo } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Button from "@/components/ui/Button";
+import RealTimeItemCard from "@/components/RealTimeItemCard";
 import { useHomeItems } from "@/hooks/useItems";
 import { useSearchHistory } from "@/store/AppContext";
 import { useNavigation } from "@/hooks/useNavigation";
 import { useItemActions } from "@/hooks/useItemActions";
+import { useToast } from "@/store/ToastContext";
 import { DESIGN_TOKENS, commonStyles } from "@/constants/design-tokens";
-import "../styles/main-page.css";
 
 // 가로스크롤 컨테이너 컴포넌트 (메모이제이션 적용)
 const HorizontalScrollContainer = memo<{ children: React.ReactNode }>(({ children }) => {
@@ -85,7 +86,7 @@ const SimpleItemCard = memo<{ item: any; onItemClick: (item: any) => void; onBid
         overflow: 'hidden'
       }}>
         <img 
-          src={item.image || item.imageUrl || '/images/placeholder.png'} 
+          src={item.image || item.imageUrl || (item.images && item.images[0]) || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjEzNSIgdmlld0JveD0iMCAwIDI0MCAxMzUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyNDAiIGhlaWdodD0iMTM1IiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMDUgNTBIMTM1Vjc1SDEwNVY1MFoiIGZpbGw9IiM5QjlDQTAiLz4KPHBhdGggZD0iTTEyMCA2MkwxMTAgNzBIMTMwTDEyMCA2MloiIGZpbGw9IiM2ODcwNzYiLz4KPHA+dGV4dCB4PSIxMjAiIHk9IjkwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjg3MDc2IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiPk5vIEltYWdlPC90ZXh0Pgo8L3N2Zz4='} 
           alt={item.title || item.name}
           style={{ 
             width: '100%', 
@@ -93,7 +94,7 @@ const SimpleItemCard = memo<{ item: any; onItemClick: (item: any) => void; onBid
             objectFit: 'cover' 
           }}
           onError={(e) => {
-            e.currentTarget.src = '/images/placeholder.png';
+            e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjEzNSIgdmlld0JveD0iMCAwIDI0MCAxMzUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyNDAiIGhlaWdodD0iMTM1IiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMDUgNTBIMTM1Vjc1SDEwNVY1MFoiIGZpbGw9IiM5QjlDQTAiLz4KPHBhdGggZD0iTTEyMCA2MkwxMTAgNzBIMTMwTDEyMCA2MloiIGZpbGw9IiM2ODcwNzYiLz4KPHA+dGV4dCB4PSIxMjAiIHk9IjkwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjg3MDc2IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiPk5vIEltYWdlPC90ZXh0Pgo8L3N2Zz4=';
           }}
         />
       </div>
@@ -127,6 +128,7 @@ SimpleItemCard.displayName = 'SimpleItemCard';
 const MainPage: React.FC = () => {
   const { handleItemClick, handleBidClick } = useItemActions();
   const { history, add: addToHistory } = useSearchHistory();
+  const { showInfo } = useToast();
   
   // 검색 관련 상태
   const [searchTerm, setSearchTerm] = useState('');
@@ -138,7 +140,7 @@ const MainPage: React.FC = () => {
   const { featuredItems, endingSoonItems, categories, isLoading, error } =
     useHomeItems();
 
-  // 검색 기능 구현
+  // 검색 기능 구현 - API 기반
   const performSearch = useCallback(async (query: string) => {
     if (!query.trim()) return;
     
@@ -147,31 +149,31 @@ const MainPage: React.FC = () => {
     setShowSearchHistory(false);
     
     try {
-      // 실제 구현에서는 API 호출
-      // 지금은 데모용으로 featuredItems와 endingSoonItems에서 필터링
-      const allItems = [...featuredItems, ...endingSoonItems];
-      const filteredItems = allItems.filter(item => 
-        item.title?.toLowerCase().includes(query.toLowerCase()) ||
-        item.name?.toLowerCase().includes(query.toLowerCase())
-      );
+      // API를 통한 검색 실행
+      const { searchItems } = await import('@/services/apiService');
+      const results = await searchItems(query);
       
       // 검색어를 히스토리에 추가
       addToHistory(query);
       
       // 검색 결과 설정
-      setSearchResults(filteredItems);
+      setSearchResults(results);
     } catch (error) {
       console.error('Search error:', error);
       setSearchResults([]);
+      showInfo("검색 오류", "검색 중 오류가 발생했습니다.");
     } finally {
       setIsSearching(false);
     }
-  }, [featuredItems, endingSoonItems, addToHistory]);
+  }, [addToHistory, showInfo]);
 
   const handleSearch = useCallback((searchQuery: string) => {
     setSearchTerm(searchQuery);
     performSearch(searchQuery);
-  }, [performSearch]);
+    if (searchQuery.trim()) {
+      showInfo("검색 실행", `"${searchQuery}" 검색 결과를 표시합니다.`);
+    }
+  }, [performSearch, showInfo]);
 
   const handleSearchFocus = useCallback(() => {
     if (history.length > 0 && !hasSearched) {
@@ -450,11 +452,12 @@ const MainPage: React.FC = () => {
                 justifyItems: 'center'
               }}>
                 {searchResults.map((item) => (
-                  <SimpleItemCard 
+                  <RealTimeItemCard 
                     key={item.id} 
                     item={item}
                     onItemClick={handleItemClick}
                     onBidClick={handleBidClick}
+                    showRealTimeUpdates={true}
                   />
                 ))}
               </div>
@@ -534,11 +537,12 @@ const MainPage: React.FC = () => {
               }}>
                 <HorizontalScrollContainer>
                   {featuredItems.map((item) => (
-                    <SimpleItemCard 
+                    <RealTimeItemCard 
                       key={item.id} 
                       item={item}
                       onItemClick={handleItemClick}
                       onBidClick={handleBidClick}
+                      showRealTimeUpdates={true}
                     />
                   ))}
                 </HorizontalScrollContainer>
@@ -569,7 +573,7 @@ const MainPage: React.FC = () => {
                   margin: 0,
                   textAlign: 'left'
                 }}>
-                  Ending Soon
+                  Ending Items
                 </h2>
               </div>
               
@@ -581,11 +585,12 @@ const MainPage: React.FC = () => {
               }}>
                 <HorizontalScrollContainer>
                   {endingSoonItems.map((item) => (
-                    <SimpleItemCard 
+                    <RealTimeItemCard 
                       key={item.id} 
                       item={item}
                       onItemClick={handleItemClick}
                       onBidClick={handleBidClick}
+                      showRealTimeUpdates={true}
                     />
                   ))}
                 </HorizontalScrollContainer>

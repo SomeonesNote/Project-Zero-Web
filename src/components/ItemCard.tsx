@@ -87,7 +87,7 @@ const ItemCard = memo<ItemCardProps>(
             </div>
           ) : (
             <img
-              src={item.image}
+              src={item.image || item.imageUrl || (item.images && item.images[0]) || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDQwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xNzUgNzVIMjI1VjEyNUgxNzVWNzVaIiBmaWxsPSIjOUI5Q0EwIi8+CjxwYXRoIGQ9Ik0yMDAgMTAwTDE4NSAxMTVIMjE1TDIwMCAxMDBaIiBmaWxsPSIjNjg3MDc2Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjg3MDc2IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiPk5vIEltYWdlPC90ZXh0Pgo8L3N2Zz4='}
               alt={item.title}
               onLoad={handleImageLoad}
               onError={handleImageError}

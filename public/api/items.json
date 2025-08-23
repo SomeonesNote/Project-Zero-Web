@@ -1,0 +1,185 @@
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "id": "item-001",
+        "title": "Vintage Leica M3 Camera",
+        "description": "Rare vintage Leica M3 35mm rangefinder camera in excellent condition. Comes with original leather case.",
+        "images": [
+          "https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=400",
+          "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400"
+        ],
+        "currentBid": 1250,
+        "startingBid": 500,
+        "buyNowPrice": 2000,
+        "endTime": "2024-12-31T23:59:59Z",
+        "status": "active",
+        "category": {
+          "id": "cat-001",
+          "name": "Cameras & Photography",
+          "slug": "cameras"
+        },
+        "seller": {
+          "id": "user-001",
+          "name": "김민수",
+          "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.8
+        },
+        "bidCount": 15,
+        "watchers": 23,
+        "createdAt": "2024-12-01T10:00:00Z",
+        "updatedAt": "2024-12-20T15:30:00Z"
+      },
+      {
+        "id": "item-002",
+        "title": "Antique Pocket Watch",
+        "description": "Beautiful 18k gold antique pocket watch from the early 1900s. Still functional with intricate engravings.",
+        "images": [
+          "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=400",
+          "https://images.unsplash.com/photo-1509048191080-d2e2678e3d24?w=400"
+        ],
+        "currentBid": 850,
+        "startingBid": 300,
+        "endTime": "2024-12-25T18:00:00Z",
+        "status": "active",
+        "category": {
+          "id": "cat-002",
+          "name": "Watches & Jewelry",
+          "slug": "watches"
+        },
+        "seller": {
+          "id": "user-002",
+          "name": "John Smith",
+          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.9
+        },
+        "bidCount": 8,
+        "watchers": 12,
+        "createdAt": "2024-12-05T14:00:00Z",
+        "updatedAt": "2024-12-20T10:15:00Z"
+      },
+      {
+        "id": "item-003",
+        "title": "Vintage Baseball Card Collection",
+        "description": "Complete set of 1952 Topps baseball cards including Mickey Mantle rookie card. Professionally graded.",
+        "images": [
+          "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400",
+          "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400"
+        ],
+        "currentBid": 3200,
+        "startingBid": 1500,
+        "buyNowPrice": 5000,
+        "endTime": "2024-12-28T20:00:00Z",
+        "status": "active",
+        "category": {
+          "id": "cat-003",
+          "name": "Sports & Collectibles",
+          "slug": "sports"
+        },
+        "seller": {
+          "id": "user-003",
+          "name": "이영희",
+          "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.7
+        },
+        "bidCount": 25,
+        "watchers": 45,
+        "createdAt": "2024-11-15T09:00:00Z",
+        "updatedAt": "2024-12-20T16:45:00Z"
+      },
+      {
+        "id": "item-004",
+        "title": "Designer Handbag - Louis Vuitton",
+        "description": "Authentic Louis Vuitton Neverfull MM in Damier Ebene canvas. Excellent condition with dust bag.",
+        "images": [
+          "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400",
+          "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400"
+        ],
+        "currentBid": 680,
+        "startingBid": 400,
+        "endTime": "2024-12-24T16:30:00Z",
+        "status": "active",
+        "category": {
+          "id": "cat-004",
+          "name": "Fashion & Accessories",
+          "slug": "fashion"
+        },
+        "seller": {
+          "id": "user-004",
+          "name": "Sarah Johnson",
+          "avatar": "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.6
+        },
+        "bidCount": 12,
+        "watchers": 28,
+        "createdAt": "2024-12-10T11:30:00Z",
+        "updatedAt": "2024-12-20T14:20:00Z"
+      },
+      {
+        "id": "item-005",
+        "title": "Rare Coin Collection",
+        "description": "Collection of rare US silver dollars from 1878-1921. Includes several key dates in AU condition.",
+        "images": [
+          "https://images.unsplash.com/photo-1622544221926-50c4840a1a30?w=400",
+          "https://images.unsplash.com/photo-1605792657660-596af9009e82?w=400"
+        ],
+        "currentBid": 1850,
+        "startingBid": 800,
+        "endTime": "2024-12-26T19:45:00Z",
+        "status": "active",
+        "category": {
+          "id": "cat-005",
+          "name": "Coins & Currency",
+          "slug": "coins"
+        },
+        "seller": {
+          "id": "user-005",
+          "name": "박철수",
+          "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.9
+        },
+        "bidCount": 18,
+        "watchers": 35,
+        "createdAt": "2024-12-08T13:15:00Z",
+        "updatedAt": "2024-12-20T17:10:00Z"
+      },
+      {
+        "id": "item-006",
+        "title": "Classic Ford Mustang Model",
+        "description": "1967 Ford Mustang Fastback die-cast model 1:18 scale. Limited edition collector's item.",
+        "images": [
+          "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=400",
+          "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400"
+        ],
+        "currentBid": 125,
+        "startingBid": 50,
+        "endTime": "2024-12-22T14:00:00Z",
+        "status": "active",
+        "category": {
+          "id": "cat-006",
+          "name": "Toys & Models",
+          "slug": "toys"
+        },
+        "seller": {
+          "id": "user-006",
+          "name": "정수진",
+          "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+          "rating": 4.5
+        },
+        "bidCount": 6,
+        "watchers": 15,
+        "createdAt": "2024-12-12T16:00:00Z",
+        "updatedAt": "2024-12-20T12:30:00Z"
+      }
+    ],
+    "meta": {
+      "currentPage": 1,
+      "totalPages": 5,
+      "totalItems": 28,
+      "itemsPerPage": 6,
+      "hasNextPage": true,
+      "hasPrevPage": false
+    }
+  }
+}

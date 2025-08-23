@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, ReactNode } from "react";
+import { createContext, useContext, useReducer, ReactNode, useEffect } from "react";
 import {
   AppState,
   AppAction,
@@ -8,6 +8,7 @@ import {
   FilterInfo,
   PaginationInfo,
 } from "@/types";
+import { getAccessToken, getUserFromToken, isTokenExpired, clearTokens } from "@/utils/auth";
 
 // 액션 타입 상수
 export const APP_ACTIONS = {
@@ -37,9 +38,30 @@ const getInitialSearchHistory = (): string[] => {
   return [];
 };
 
+// JWT 토큰에서 사용자 정보 불러오기
+const getInitialUser = (): User | null => {
+  const token = getAccessToken();
+  if (!token || isTokenExpired()) {
+    clearTokens();
+    return null;
+  }
+
+  const userData = getUserFromToken(token);
+  if (!userData) return null;
+
+  // 토큰에서 사용자 정보 추출
+  return {
+    id: userData.id,
+    name: userData.name,
+    email: userData.email,
+    avatar: userData.avatar,
+    isAuthenticated: true,
+  };
+};
+
 // 초기 상태
 const initialState: AppState = {
-  user: null,
+  user: getInitialUser(),
   currentPage: "main",
   searchHistory: getInitialSearchHistory(),
   items: [],
@@ -75,7 +97,15 @@ const initialState: AppState = {
 function appReducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
     case APP_ACTIONS.SET_USER:
-      return { ...state, user: action.payload };
+      const user = action.payload;
+      
+      // 사용자가 null이면 토큰 삭제
+      if (!user || !user.isAuthenticated) {
+        clearTokens();
+      }
+      // 토큰은 로그인 시에만 저장하므로 여기서는 별도 처리하지 않음
+      
+      return { ...state, user };
 
     case APP_ACTIONS.SET_CURRENT_PAGE:
       return { ...state, currentPage: action.payload };

@@ -1,74 +1,71 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { DESIGN_TOKENS, commonStyles } from '@/constants/design-tokens';
 import Button from '@/components/ui/Button';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import { fetchUserBids, fetchUserListings } from '@/services/apiService';
+import { useUser } from '@/store/AppContext';
+import { useToast } from '@/store/ToastContext';
 
 interface BidItem {
   id: string;
-  item: string;
+  itemId: string;
+  itemName: string;
   status: 'Active' | 'Won' | 'Lost' | 'Pending';
-  currentBid: string;
+  bidAmount: number;
+  currentBid: number;
   timeLeft: string;
-  image: string;
+  itemImage: string;
+  createdAt: string;
 }
 
 interface ListingItem {
   id: string;
-  item: string;
+  itemName: string;
   status: 'Active' | 'Sold' | 'Expired';
-  currentBid: string;
+  currentBid: number;
   timeLeft: string;
-  image: string;
+  itemImage: string;
+  createdAt: string;
+  bidsCount: number;
 }
 
 const MyBidPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'bidding' | 'listings'>('bidding');
+  const [user] = useUser();
+  const { showError } = useToast();
 
-  // 더미 데이터
-  const biddingHistory: BidItem[] = [
-    {
-      id: '1',
-      item: 'Vintage Camera',
-      status: 'Active',
-      currentBid: '$250',
-      timeLeft: '2d 14h',
-      image: 'https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=400'
-    },
-    {
-      id: '2',
-      item: 'Antique Clock',
-      status: 'Won',
-      currentBid: '$180',
-      timeLeft: 'Ended',
-      image: 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=400'
-    },
-    {
-      id: '3',
-      item: 'Rare Coin Collection',
-      status: 'Lost',
-      currentBid: '$520',
-      timeLeft: 'Ended',
-      image: 'https://images.unsplash.com/photo-1622544221926-50c4840a1a30?w=400'
+  // API를 통한 데이터 페칭
+  const {
+    data: userBids = [],
+    isLoading: bidsLoading,
+    error: bidsError
+  } = useQuery({
+    queryKey: ['user-bids', user?.id],
+    queryFn: fetchUserBids,
+    enabled: !!user?.id && activeTab === 'bidding',
+    onError: (error) => {
+      console.error('입찰 내역 로딩 실패:', error);
+      showError('오류', '입찰 내역을 불러오는데 실패했습니다.');
     }
-  ];
+  });
 
-  const myListings: ListingItem[] = [
-    {
-      id: '1',
-      item: 'Designer Watch',
-      status: 'Active',
-      currentBid: '$420',
-      timeLeft: '1d 8h',
-      image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400'
-    },
-    {
-      id: '2',
-      item: 'Art Painting',
-      status: 'Sold',
-      currentBid: '$1,200',
-      timeLeft: 'Ended',
-      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400'
+  const {
+    data: userListings = [],
+    isLoading: listingsLoading,
+    error: listingsError
+  } = useQuery({
+    queryKey: ['user-listings', user?.id],
+    queryFn: fetchUserListings,
+    enabled: !!user?.id && activeTab === 'listings',
+    onError: (error) => {
+      console.error('등록 상품 로딩 실패:', error);
+      showError('오류', '등록 상품을 불러오는데 실패했습니다.');
     }
-  ];
+  });
+
+  const isLoading = activeTab === 'bidding' ? bidsLoading : listingsLoading;
+  const currentData = activeTab === 'bidding' ? userBids : userListings;
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -85,7 +82,7 @@ const MyBidPage: React.FC = () => {
     }
   };
 
-  const TableRow: React.FC<{ item: BidItem | ListingItem; type: 'bidding' | 'listings' }> = ({ item, type }) => (
+  const TableRow: React.FC<{ item: any; type: 'bidding' | 'listings' }> = ({ item, type }) => (
     <tr style={{
       borderBottom: `1px solid ${DESIGN_TOKENS.colors.border}`,
     }}>
@@ -96,13 +93,16 @@ const MyBidPage: React.FC = () => {
         gap: DESIGN_TOKENS.spacing.md
       }}>
         <img
-          src={item.image}
-          alt={item.item}
+          src={item.itemImage || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0yMCAxOEgyOFYyNkgyMFYxOFoiIGZpbGw9IiM5QjlDQTAiLz4KPHA2aCBkPSJNMjQgMjJMMjEgMjVIMjdMMjQgMjJaIiBmaWxsPSIjNjg3MDc2Ii8+Cjx0ZXh0IHg9IjI0IiB5PSIzNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzY4NzA3NiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjgiPk5vIEltYWdlPC90ZXh0Pgo8L3N2Zz4='}
+          alt={item.itemName}
           style={{
             width: '48px',
             height: '48px',
             borderRadius: DESIGN_TOKENS.layout.borderRadius.md,
             objectFit: 'cover'
+          }}
+          onError={(e) => {
+            e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0yMCAxOEgyOFYyNkgyMFYxOFoiIGZpbGw9IiM5QjlDQTAiLz4KPHBhdGggZD0iTTI0IDIyTDIxIDI1SDI3TDI0IDIyWiIgZmlsbD0iIzY4NzA3NiIvPgo8dGV4dCB4PSIyNCIgeT0iMzQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2ODcwNzYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI4Ij5ObyBJbWFnZTwvdGV4dD4KPHN2Zz4=';
           }}
         />
         <span style={{
@@ -110,7 +110,7 @@ const MyBidPage: React.FC = () => {
           fontWeight: DESIGN_TOKENS.fontWeights.medium,
           fontSize: DESIGN_TOKENS.fontSizes.sm
         }}>
-          {item.item}
+          {item.itemName}
         </span>
       </td>
       <td style={{
@@ -135,7 +135,7 @@ const MyBidPage: React.FC = () => {
         fontWeight: DESIGN_TOKENS.fontWeights.semibold,
         fontSize: DESIGN_TOKENS.fontSizes.sm
       }}>
-        {item.currentBid}
+        ${(item.currentBid || 0).toLocaleString()}
       </td>
       <td style={{
         padding: `${DESIGN_TOKENS.spacing.lg} ${DESIGN_TOKENS.spacing.md}`,
@@ -161,6 +161,49 @@ const MyBidPage: React.FC = () => {
       </td>
     </tr>
   );
+
+  // 사용자 인증이 필요한 페이지
+  if (!user) {
+    return (
+      <div style={{
+        backgroundColor: DESIGN_TOKENS.colors.white,
+        minHeight: '100vh',
+        fontFamily: DESIGN_TOKENS.fonts.primary,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{
+          textAlign: 'center',
+          padding: DESIGN_TOKENS.spacing['4xl'],
+          backgroundColor: DESIGN_TOKENS.colors.light,
+          borderRadius: DESIGN_TOKENS.layout.borderRadius.lg,
+          maxWidth: '400px'
+        }}>
+          <h2 style={{
+            ...commonStyles.text.heading,
+            fontSize: DESIGN_TOKENS.fontSizes['2xl'],
+            marginBottom: DESIGN_TOKENS.spacing.lg
+          }}>
+            로그인이 필요합니다
+          </h2>
+          <p style={{
+            ...commonStyles.text.secondary,
+            marginBottom: DESIGN_TOKENS.spacing.xl
+          }}>
+            입찰 내역과 등록 상품을 보려면 로그인해주세요.
+          </p>
+          <Button
+            variant="primary"
+            size="medium"
+            onClick={() => window.location.href = '/signin'}
+          >
+            로그인하기
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{
@@ -306,48 +349,37 @@ const MyBidPage: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {activeTab === 'bidding' ? (
-                biddingHistory.length > 0 ? (
-                  biddingHistory.map((item) => (
-                    <TableRow key={item.id} item={item} type="bidding" />
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={5} style={{
-                      padding: `${DESIGN_TOKENS.spacing['4xl']} ${DESIGN_TOKENS.spacing.md}`,
-                      textAlign: 'center',
-                      ...commonStyles.text.secondary,
-                      fontSize: DESIGN_TOKENS.fontSizes.lg
-                    }}>
-                      No bidding history yet
-                    </td>
-                  </tr>
-                )
+              {isLoading ? (
+                <tr>
+                  <td colSpan={5} style={{
+                    padding: `${DESIGN_TOKENS.spacing['4xl']} ${DESIGN_TOKENS.spacing.md}`,
+                    textAlign: 'center'
+                  }}>
+                    <LoadingSpinner size="medium" text="데이터를 불러오는 중..." />
+                  </td>
+                </tr>
+              ) : currentData.length > 0 ? (
+                currentData.map((item: any) => (
+                  <TableRow key={item.id} item={item} type={activeTab} />
+                ))
               ) : (
-                myListings.length > 0 ? (
-                  myListings.map((item) => (
-                    <TableRow key={item.id} item={item} type="listings" />
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={5} style={{
-                      padding: `${DESIGN_TOKENS.spacing['4xl']} ${DESIGN_TOKENS.spacing.md}`,
-                      textAlign: 'center',
-                      ...commonStyles.text.secondary,
-                      fontSize: DESIGN_TOKENS.fontSizes.lg
-                    }}>
-                      No listings yet
-                    </td>
-                  </tr>
-                )
+                <tr>
+                  <td colSpan={5} style={{
+                    padding: `${DESIGN_TOKENS.spacing['4xl']} ${DESIGN_TOKENS.spacing.md}`,
+                    textAlign: 'center',
+                    ...commonStyles.text.secondary,
+                    fontSize: DESIGN_TOKENS.fontSizes.lg
+                  }}>
+                    {activeTab === 'bidding' ? 'No bidding history yet' : 'No listings yet'}
+                  </td>
+                </tr>
               )}
             </tbody>
           </table>
         </div>
 
         {/* 빈 상태일 때 액션 버튼 */}
-        {((activeTab === 'bidding' && biddingHistory.length === 0) || 
-          (activeTab === 'listings' && myListings.length === 0)) && (
+        {!isLoading && currentData.length === 0 && (
           <div style={{
             textAlign: 'center',
             marginTop: DESIGN_TOKENS.spacing['3xl']

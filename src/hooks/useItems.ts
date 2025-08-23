@@ -4,21 +4,18 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { apiService } from "@/services/apiService";
-import { QUERY_KEYS } from "@/services/queryClient";
-import {
-  Item,
-  Category,
-  ItemsAPIResponse,
-  APIOptions,
-  SearchSuggestion,
-} from "@/types";
+import { 
+  fetchFeaturedItems, 
+  fetchEndingSoonItems,
+  api
+} from "@/services/apiService";
+import type { ItemResponse, CategoryResponse } from "@/types/api";
 
 // 모든 아이템 조회
-export function useAllItems(options?: APIOptions) {
+export function useAllItems(params?: any) {
   return useQuery({
-    queryKey: [...QUERY_KEYS.ITEMS.ALL, options],
-    queryFn: () => apiService.getAllItems(options),
+    queryKey: ['items', params],
+    queryFn: () => api.getItems(params),
     enabled: true,
     staleTime: 2 * 60 * 1000, // 2분
   });
@@ -29,18 +26,21 @@ export function useHomeItems() {
   const queries = useQueries({
     queries: [
       {
-        queryKey: QUERY_KEYS.ITEMS.FEATURED,
-        queryFn: () => apiService.getFeaturedItems(4),
+        queryKey: ['featured-items'],
+        queryFn: fetchFeaturedItems,
         staleTime: 5 * 60 * 1000, // 5분
       },
       {
-        queryKey: QUERY_KEYS.ITEMS.ENDING_SOON,
-        queryFn: () => apiService.getEndingSoonItems(4),
+        queryKey: ['ending-soon-items'],
+        queryFn: fetchEndingSoonItems,
         staleTime: 1 * 60 * 1000, // 1분 (더 자주 업데이트)
       },
       {
-        queryKey: QUERY_KEYS.CATEGORIES.ALL,
-        queryFn: () => apiService.getCategories(),
+        queryKey: ['categories'],
+        queryFn: async () => {
+          const response = await api.getCategories();
+          return response.data.categories;
+        },
         staleTime: 10 * 60 * 1000, // 10분
       },
     ],
@@ -59,8 +59,8 @@ export function useHomeItems() {
 // Featured Items만 조회
 export function useFeaturedItems(limit?: number) {
   return useQuery({
-    queryKey: [...QUERY_KEYS.ITEMS.FEATURED, limit],
-    queryFn: () => apiService.getFeaturedItems(limit),
+    queryKey: ['featured-items', limit],
+    queryFn: fetchFeaturedItems,
     staleTime: 5 * 60 * 1000,
   });
 }
@@ -68,17 +68,17 @@ export function useFeaturedItems(limit?: number) {
 // Ending Soon Items만 조회
 export function useEndingSoonItems(limit?: number) {
   return useQuery({
-    queryKey: [...QUERY_KEYS.ITEMS.ENDING_SOON, limit],
-    queryFn: () => apiService.getEndingSoonItems(limit),
+    queryKey: ['ending-soon-items', limit],
+    queryFn: fetchEndingSoonItems,
     staleTime: 1 * 60 * 1000,
   });
 }
 
 // 카테고리별 아이템 조회
-export function useItemsByCategory(categoryId: string, options?: APIOptions) {
+export function useItemsByCategory(categoryId: string, params?: any) {
   return useQuery({
-    queryKey: [...QUERY_KEYS.ITEMS.BY_CATEGORY(categoryId), options],
-    queryFn: () => apiService.getItemsByCategory(categoryId, options),
+    queryKey: ['items', 'category', categoryId, params],
+    queryFn: () => api.getItems({ category: categoryId, ...params }),
     enabled: !!categoryId,
     staleTime: 3 * 60 * 1000,
   });
@@ -87,8 +87,8 @@ export function useItemsByCategory(categoryId: string, options?: APIOptions) {
 // 아이템 상세 조회
 export function useItemDetail(itemId: string) {
   return useQuery({
-    queryKey: QUERY_KEYS.ITEMS.DETAIL(itemId),
-    queryFn: () => apiService.getItemDetail(itemId),
+    queryKey: ['item', itemId],
+    queryFn: () => api.getItemDetail(itemId),
     enabled: !!itemId,
     staleTime: 5 * 60 * 1000,
     retry: 1,
@@ -96,21 +96,21 @@ export function useItemDetail(itemId: string) {
 }
 
 // 검색
-export function useSearchItems(searchTerm: string, options?: APIOptions) {
+export function useSearchItems(searchTerm: string, params?: any) {
   return useQuery({
-    queryKey: [...QUERY_KEYS.ITEMS.SEARCH(searchTerm), options],
-    queryFn: () => apiService.getAllItems({ ...options, search: searchTerm }),
+    queryKey: ['items', 'search', searchTerm, params],
+    queryFn: () => api.searchItems(searchTerm),
     enabled: !!searchTerm && searchTerm.length > 2,
     staleTime: 2 * 60 * 1000,
   });
 }
 
-// 검색 제안
+// 검색 제안 (향후 구현)
 export function useSearchSuggestions(query: string) {
   return useQuery({
-    queryKey: QUERY_KEYS.SEARCH.SUGGESTIONS(query),
-    queryFn: () => apiService.getSearchSuggestions(query),
-    enabled: !!query && query.length >= 2,
+    queryKey: ['search-suggestions', query],
+    queryFn: () => Promise.resolve([]), // 현재는 빈 배열 반환
+    enabled: false, // 향후 구현 시 true로 변경
     staleTime: 5 * 60 * 1000,
   });
 }
@@ -118,8 +118,11 @@ export function useSearchSuggestions(query: string) {
 // 카테고리 조회
 export function useCategories() {
   return useQuery({
-    queryKey: QUERY_KEYS.CATEGORIES.ALL,
-    queryFn: () => apiService.getCategories(),
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const response = await api.getCategories();
+      return response.data.categories;
+    },
     staleTime: 10 * 60 * 1000,
   });
 }
@@ -129,11 +132,11 @@ export function useInvalidateQueries() {
   const queryClient = useQueryClient();
 
   const invalidateItems = () => {
-    queryClient.invalidateQueries({ queryKey: QUERY_KEYS.ITEMS.ALL });
+    queryClient.invalidateQueries({ queryKey: ['items'] });
   };
 
   const invalidateCategories = () => {
-    queryClient.invalidateQueries({ queryKey: QUERY_KEYS.CATEGORIES.ALL });
+    queryClient.invalidateQueries({ queryKey: ['categories'] });
   };
 
   const invalidateAll = () => {
@@ -153,8 +156,8 @@ export function usePrefetchItem() {
 
   const prefetchItem = (itemId: string) => {
     queryClient.prefetchQuery({
-      queryKey: QUERY_KEYS.ITEMS.DETAIL(itemId),
-      queryFn: () => apiService.getItemDetail(itemId),
+      queryKey: ['item', itemId],
+      queryFn: () => api.getItemDetail(itemId),
       staleTime: 5 * 60 * 1000,
     });
   };
