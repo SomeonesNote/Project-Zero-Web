@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSearchParams, useNavigate, useParams } from "react-router-dom";
 import SearchBar from "@/components/SearchBar";
 import CategoryTags from "@/components/CategoryTags";

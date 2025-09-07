@@ -1,5 +1,6 @@
 import { useUser } from "@/store/AppContext";
 import { Navigate } from "react-router-dom";
+import { useUser } from "@/store/AppContext";
 
 const ProfilePage: React.FC = () => {
   const [user] = useUser();

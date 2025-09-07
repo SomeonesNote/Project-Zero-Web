@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "@/store/AppContext";
+import { api } from "@/services/apiService";
+import { useToast } from "@/store/ToastContext";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { DESIGN_TOKENS, commonStyles } from "@/constants/design-tokens";
@@ -9,9 +11,11 @@ import { useNavigation } from "@/hooks/useNavigation";
 const SignUpPage: React.FC = () => {
   const [user, setUser] = useUser();
   const { navigateToHome } = useNavigation();
+  const { showToast } = useToast();
 
   const [formData, setFormData] = useState({
     fullName: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -39,6 +43,12 @@ const SignUpPage: React.FC = () => {
 
     if (!formData.fullName.trim()) {
       newErrors.fullName = "이름을 입력해주세요.";
+    }
+
+    if (!formData.username.trim()) {
+      newErrors.username = "사용자명을 입력해주세요.";
+    } else if (!/^[a-zA-Z0-9_]{3,20}$/.test(formData.username)) {
+      newErrors.username = "사용자명은 3-20자의 영문, 숫자, _만 사용 가능합니다.";
     }
 
     if (!formData.email.trim()) {
@@ -73,21 +83,35 @@ const SignUpPage: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // 회원가입 API 호출 (데모)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // 사용자 정보 설정
-      const newUser = {
-        id: Date.now().toString(),
-        name: formData.fullName,
+      const response = await api.register({
         email: formData.email,
-        isAuthenticated: true,
-      };
+        username: formData.username,
+        full_name: formData.fullName,
+        password: formData.password,
+      });
 
-      setUser(newUser);
-      navigateToHome();
-    } catch (error) {
-      setErrors({ general: "회원가입 중 오류가 발생했습니다." });
+      if (response.success) {
+        const { user, token } = response.data;
+        
+        // 토큰 저장
+        localStorage.setItem('access_token', token);
+        
+        // 사용자 정보 설정
+        setUser({
+          id: user.id,
+          name: user.full_name || user.username,
+          email: user.email,
+          isAuthenticated: true,
+        });
+
+        showToast("회원가입이 완료되었습니다!", "success");
+        navigateToHome();
+      } else {
+        setErrors({ general: response.message || response.error || "회원가입에 실패했습니다." });
+      }
+    } catch (error: any) {
+      console.error('Registration error:', error);
+      setErrors({ general: error.message || "회원가입 중 오류가 발생했습니다." });
     } finally {
       setIsLoading(false);
     }
@@ -171,6 +195,29 @@ const SignUpPage: React.FC = () => {
                 placeholder="Enter your full name"
                 disabled={isLoading}
                 error={errors.fullName}
+                required
+              />
+            </div>
+
+            {/* Username */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'stretch',
+              alignItems: 'stretch',
+              flexWrap: 'wrap',
+              gap: DESIGN_TOKENS.spacing.lg,
+              padding: `${DESIGN_TOKENS.spacing.md} ${DESIGN_TOKENS.spacing.lg}`
+            }}>
+              <Input
+                type="text"
+                id="username"
+                name="username"
+                label="Username"
+                value={formData.username}
+                onChange={handleInputChange}
+                placeholder="Choose a username"
+                disabled={isLoading}
+                error={errors.username}
                 required
               />
             </div>

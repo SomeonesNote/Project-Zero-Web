@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCategories } from "@/hooks/useItems";
 import LoadingSpinner from "@/components/LoadingSpinner";
 

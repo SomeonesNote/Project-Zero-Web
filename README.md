@@ -208,6 +208,29 @@ npm run lint
 - 테이블 형태 데이터 표시
 - 상태별 색상 구분
 
+## 🔥 최근 업데이트 사항 (2025년)
+
+### 환경 설정 문제 해결
+- **Vite 환경 변수 수정**: `process.env` → `import.meta.env`로 변경
+- **개발 서버 안정화**: 콘솔 오류 완전 제거
+- **WebSocket 시뮬레이션 개선**: 개발 모드에서 OFFLINE 상태 문제 해결
+
+### 이미지 시스템 개선
+- **포괄적인 이미지 fallback 시스템 구축**: 모든 페이지에서 이미지 오류 방지
+- **SVG placeholder 도입**: 이미지 로드 실패 시 자동 대체 표시
+- **Unsplash URL 적용**: 안정적인 외부 이미지 소스 활용
+
+### UI/UX 개선
+- **카드 디자인 최적화**: "상세보기" 버튼 제거, 카드 클릭 네비게이션으로 통일
+- **섹션 타이틀 업데이트**: "Ending Soon" → "Ending Items"로 변경
+- **Featured Items 로직 개선**: 최신 등록순 4개 아이템 표시
+- **Header 로고 재설계**: CSS 기반 로고로 변경
+
+### 데이터 구조 개선
+- **JSON 데이터 재구성**: `ending-items.json` 생성 및 구조 개선
+- **타임스탬프 추가**: 모든 아이템에 `createdAt` 필드 추가
+- **상태 관리 개선**: 종료된 경매 아이템 상태 표시 최적화
+
 ## 🔮 향후 개선 계획
 
 - [ ] 실제 백엔드 API 연동
@@ -218,6 +241,166 @@ npm run lint
 - [ ] 다국어 지원 (i18n)
 - [ ] 다크 모드 테마
 - [ ] PWA 지원
+
+## 🖥️ 백엔드 서버 요구사항
+
+### 필수 API 엔드포인트
+
+#### 인증 관련 API
+```typescript
+POST   /api/auth/login           // 로그인
+POST   /api/auth/register        // 회원가입
+POST   /api/auth/logout          // 로그아웃
+GET    /api/auth/me              // 현재 사용자 정보
+PUT    /api/auth/profile         // 프로필 업데이트
+```
+
+#### 상품 관리 API
+```typescript
+GET    /api/items                // 상품 목록 (페이지네이션, 필터링)
+GET    /api/items/featured       // 추천 상품 (최신 등록순 4개)
+GET    /api/items/ending         // 종료된 경매 (최근 종료순 4개)
+GET    /api/items/:id            // 상품 상세 정보
+POST   /api/items                // 새 상품 등록
+PUT    /api/items/:id            // 상품 정보 수정
+DELETE /api/items/:id            // 상품 삭제
+```
+
+#### 입찰 관리 API
+```typescript
+GET    /api/bids                 // 입찰 내역 조회
+POST   /api/bids                 // 새 입찰 생성
+GET    /api/bids/user/:userId    // 사용자별 입찰 내역
+GET    /api/bids/item/:itemId    // 상품별 입찰 내역
+```
+
+#### 사용자 활동 API
+```typescript
+GET    /api/users/:id/bids       // 사용자 입찰 내역
+GET    /api/users/:id/listings   // 사용자 등록 상품
+GET    /api/users/:id/watchlist  // 관심 상품
+```
+
+#### 검색 및 카테고리 API
+```typescript
+GET    /api/search?q=keyword     // 상품 검색
+GET    /api/categories           // 카테고리 목록
+GET    /api/categories/:id/items // 카테고리별 상품
+```
+
+### 데이터베이스 스키마
+
+#### Users 테이블
+```sql
+CREATE TABLE users (
+  id UUID PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  avatar VARCHAR(500),
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+#### Items 테이블
+```sql
+CREATE TABLE items (
+  id UUID PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  image VARCHAR(500),
+  images JSON, -- 추가 이미지들
+  starting_price DECIMAL(10,2) NOT NULL,
+  current_bid DECIMAL(10,2) DEFAULT starting_price,
+  status ENUM('active', 'ended', 'sold') DEFAULT 'active',
+  end_time TIMESTAMP NOT NULL,
+  seller_id UUID REFERENCES users(id),
+  category VARCHAR(100),
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+#### Bids 테이블
+```sql
+CREATE TABLE bids (
+  id UUID PRIMARY KEY,
+  item_id UUID REFERENCES items(id),
+  bidder_id UUID REFERENCES users(id),
+  amount DECIMAL(10,2) NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+#### Trade_Offers 테이블 (물물교환)
+```sql
+CREATE TABLE trade_offers (
+  id UUID PRIMARY KEY,
+  item_id UUID REFERENCES items(id),
+  offeror_id UUID REFERENCES users(id),
+  description TEXT NOT NULL,
+  estimated_value DECIMAL(10,2),
+  image VARCHAR(500),
+  status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending',
+  created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+### 실시간 기능 (WebSocket)
+
+#### WebSocket 이벤트
+```typescript
+// 클라이언트 → 서버
+'join_room'     // 특정 상품 룸 입장
+'leave_room'    // 룸 떠나기
+'new_bid'       // 새 입찰
+
+// 서버 → 클라이언트
+'bid_update'    // 입찰 업데이트
+'auction_ended' // 경매 종료
+'user_joined'   // 사용자 입장
+'connection_status' // 연결 상태
+```
+
+### 환경 변수 설정
+
+#### 클라이언트 (.env)
+```bash
+VITE_API_URL=http://localhost:8000/api
+VITE_WS_URL=ws://localhost:8000/ws
+VITE_UPLOAD_URL=http://localhost:8000/uploads
+```
+
+#### 서버 (.env)
+```bash
+DATABASE_URL=postgresql://user:password@localhost:5432/bidswap
+JWT_SECRET=your-jwt-secret-key
+JWT_EXPIRES_IN=7d
+CORS_ORIGIN=http://localhost:5173
+UPLOAD_PATH=./uploads
+MAX_FILE_SIZE=5MB
+```
+
+### 추가 고려사항
+
+#### 보안
+- JWT 토큰 기반 인증
+- 비밀번호 해싱 (bcrypt)
+- CORS 정책 설정
+- Rate limiting
+- 파일 업로드 검증
+
+#### 성능
+- 데이터베이스 인덱싱
+- Redis 캐싱 (입찰 내역, 인기 상품)
+- CDN을 통한 이미지 서빙
+- API 응답 압축
+
+#### 알림 시스템
+- 이메일 알림 (입찰, 경매 종료)
+- 실시간 브라우저 알림
+- 모바일 푸시 알림 (향후)
 
 ## 🤝 기여하기
 

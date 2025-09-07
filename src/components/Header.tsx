@@ -5,12 +5,17 @@ import Button from "./ui/Button";
 import { DESIGN_TOKENS, commonStyles } from "@/constants/design-tokens";
 import { useNavigation } from "@/hooks/useNavigation";
 import { useUser } from "@/store/AppContext";
+import { useToast } from "@/store/ToastContext";
+import { clearTokens } from "@/utils/auth";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Header: React.FC<HeaderProps> = ({ onNavigate, currentUser }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [, setUser] = useUser();
   const { navigateToHome, navigateToSignIn, navigateToSearch } = useNavigation();
+  const { showInfo } = useToast();
+  const queryClient = useQueryClient();
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   const handleLogoClick = () => {
@@ -32,9 +37,31 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentUser }) => {
   };
 
   const handleLogout = () => {
-    setUser(null);
-    setShowUserMenu(false);
-    navigateToHome();
+    const userName = currentUser?.name || "사용자";
+    
+    try {
+      // 1. 사용자 상태 클리어
+      setUser(null);
+      
+      // 2. 토큰 삭제
+      clearTokens();
+      
+      // 3. 메뉴 닫기
+      setShowUserMenu(false);
+      
+      // 4. 성공 메시지 표시
+      showInfo("로그아웃", `${userName}님, 안전하게 로그아웃되었습니다.`);
+      
+      // 5. 페이지 새로고침으로 완전히 상태 초기화
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1000);
+      
+    } catch (error) {
+      console.error('로그아웃 처리 중 오류:', error);
+      // 오류 발생해도 강제 리다이렉션
+      window.location.href = '/';
+    }
   };
 
   const toggleUserMenu = () => {
@@ -79,10 +106,20 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentUser }) => {
             gap: DESIGN_TOKENS.spacing.lg
           }}>
             <div style={{ width: '16px', height: '16px' }}>
-              <img
-                src="/images/logo.svg"
-                alt="BidSwap Logo"
-                style={{ width: '16px', height: '16px', cursor: 'pointer' }}
+              <div
+                style={{ 
+                  width: '16px', 
+                  height: '16px', 
+                  cursor: 'pointer',
+                  backgroundColor: DESIGN_TOKENS.colors.primary,
+                  borderRadius: '2px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: DESIGN_TOKENS.colors.white,
+                  fontSize: '10px',
+                  fontWeight: DESIGN_TOKENS.fontWeights.bold
+                }}
                 onClick={handleLogoClick}
                 role="button"
                 tabIndex={0}
@@ -91,7 +128,9 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentUser }) => {
                     handleLogoClick();
                   }
                 }}
-              />
+              >
+                B
+              </div>
             </div>
             <h1
               style={{ 
@@ -202,10 +241,22 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, currentUser }) => {
                         borderRadius: DESIGN_TOKENS.layout.borderRadius.full,
                         objectFit: 'cover'
                       }}
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        const nextElement = e.currentTarget.nextElementSibling;
+                        if (nextElement) {
+                          (nextElement as HTMLElement).style.display = 'block';
+                        }
+                      }}
                     />
-                  ) : (
-                    <span>{currentUser.name.charAt(0).toUpperCase()}</span>
-                  )}
+                  ) : null}
+                  <span 
+                    style={{ 
+                      display: currentUser.avatar ? 'none' : 'block' 
+                    }}
+                  >
+                    {(currentUser.name || currentUser.full_name || currentUser.username || 'U').charAt(0).toUpperCase()}
+                  </span>
                 </button>
 
                 {/* 유저 드롭다운 메뉴 */}

@@ -1,0 +1,45 @@
+{
+  "success": true,
+  "data": {
+    "listings": [
+      {
+        "id": "item-009",
+        "title": "Designer Watch Collection",
+        "image": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400",
+        "currentBid": 420,
+        "bidCount": 7,
+        "endTime": "2024-12-29T15:00:00Z",
+        "status": "active",
+        "createdAt": "2024-12-11T10:00:00Z"
+      },
+      {
+        "id": "item-010",
+        "title": "Vintage Art Painting",
+        "image": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400",
+        "currentBid": 1200,
+        "bidCount": 15,
+        "endTime": "2024-12-17T18:00:00Z",
+        "status": "sold",
+        "createdAt": "2024-11-20T14:30:00Z"
+      },
+      {
+        "id": "item-011",
+        "title": "Collectible Stamps Set",
+        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400",
+        "currentBid": 0,
+        "bidCount": 0,
+        "endTime": "2024-12-10T12:00:00Z",
+        "status": "expired",
+        "createdAt": "2024-11-25T16:15:00Z"
+      }
+    ],
+    "meta": {
+      "currentPage": 1,
+      "totalPages": 1,
+      "totalItems": 3,
+      "itemsPerPage": 10,
+      "hasNextPage": false,
+      "hasPrevPage": false
+    }
+  }
+}
