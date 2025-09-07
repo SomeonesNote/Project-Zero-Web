@@ -48,4 +48,4 @@ coverage
 *.tsbuildinfo
 
 #Agent
-.mpc.json
+.mcp.json
